@@ -2,60 +2,33 @@
 # HESSIAN-AI
 # QUANTITATIVE ACTUARIAL EMPLOYEE BENEFITS DASHBOARD
 # STREAMLIT APPLICATION
-# =============================================================================
 #
-# PURPOSE
-# -------
+# DASHBOARD DATA SOURCE:
+# Pipeline 11 — Dashboard Data Mart
 #
-# This Streamlit application consumes ONLY the validated dashboard-ready
-# datasets produced by Pipeline 11.
-#
-# The dashboard does NOT recalculate actuarial liabilities or assumptions.
-#
-# Data architecture:
-#
-# Pipelines 01-10
-#       ->
-# Pipeline 11 Dashboard Data Mart
-#       ->
-# Data/dashboard_ready/
-#       ->
-# Streamlit Dashboard
-#
+# IMPORTANT:
+# This application DOES NOT recalculate actuarial liabilities.
+# It consumes validated dashboard-ready outputs produced by Pipelines 01–11.
 # =============================================================================
 
 
-# Import Path so file locations remain portable across Windows,
-# GitHub and Streamlit deployment.
+# =============================================================================
+# IMPORTS
+# =============================================================================
+
 from pathlib import Path
 
-
-# Import NumPy for numerical and missing-value handling.
 import numpy as np
-
-
-# Import pandas for reading and filtering dashboard datasets.
 import pandas as pd
-
-
-# Import Streamlit for the interactive web dashboard.
-import streamlit as st
-
-
-# Import Plotly Express for professional interactive charts.
 import plotly.express as px
-
-
-# Import Plotly Graph Objects for charts requiring multiple series.
 import plotly.graph_objects as go
+import streamlit as st
 
 
 # =============================================================================
 # PAGE CONFIGURATION
 # =============================================================================
 
-
-# Configure the Streamlit browser page.
 st.set_page_config(
     page_title="Hessian-AI Employee Benefits Dashboard",
     page_icon="📊",
@@ -68,12 +41,8 @@ st.set_page_config(
 # PROJECT PATHS
 # =============================================================================
 
-
-# Identify the project root from the location of app.py.
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-
-# Define the dashboard-ready data directory created by Pipeline 11.
 DATA_DIR = (
     PROJECT_ROOT
     / "Data"
@@ -82,11 +51,9 @@ DATA_DIR = (
 
 
 # =============================================================================
-# DASHBOARD FILE MAP
+# PIPELINE 11 DASHBOARD FILES
 # =============================================================================
 
-
-# Map logical dashboard datasets to physical CSV files.
 FILES = {
 
     "kpis":
@@ -125,93 +92,65 @@ FILES = {
 # DATA LOADER
 # =============================================================================
 
-
-# Cache CSV files so Streamlit does not reload them on every interaction.
 @st.cache_data(show_spinner=False)
 def load_dashboard_file(
     file_name,
 ):
 
-
-    # Construct full file path.
     path = (
         DATA_DIR
         / file_name
     )
 
-
-    # Stop gracefully when a required dashboard file is absent.
     if not path.exists():
 
         return pd.DataFrame()
 
-
-    # Load CSV.
     return pd.read_csv(
         path
     )
 
 
 # =============================================================================
-# LOAD PIPELINE 11 DATA MART
+# LOAD DASHBOARD DATA
 # =============================================================================
 
-
-# Load executive KPI cards.
 kpis = load_dashboard_file(
     FILES["kpis"]
 )
 
-
-# Load product-level portfolio summary.
 products = load_dashboard_file(
     FILES["products"]
 )
 
-
-# Load plan-level portfolio summary.
 plans = load_dashboard_file(
     FILES["plans"]
 )
 
-
-# Load employee drill-down table.
 employees = load_dashboard_file(
     FILES["employees"]
 )
 
-
-# Load workforce concentration table.
 segments = load_dashboard_file(
     FILES["segments"]
 )
 
-
-# Load governance register.
 governance = load_dashboard_file(
     FILES["governance"]
 )
 
-
-# Load validation register.
 validation = load_dashboard_file(
     FILES["validation"]
 )
 
-
-# Load dashboard filter catalogue.
 filters = load_dashboard_file(
     FILES["filters"]
 )
 
-
-# Load visualization catalogue.
 visual_catalog = load_dashboard_file(
     FILES["visual_catalog"]
 )
 
-
-# Load dashboard dataset manifest.
 manifest = load_dashboard_file(
     FILES["manifest"]
 )
@@ -221,12 +160,10 @@ manifest = load_dashboard_file(
 # CRITICAL DATA CHECK
 # =============================================================================
 
-
-# Stop the application if Pipeline 11 outputs are unavailable.
 if kpis.empty:
 
     st.error(
-        "Pipeline 11 dashboard-ready data could not be found."
+        "Pipeline 11 dashboard-ready KPI data could not be found."
     )
 
     st.code(
@@ -237,200 +174,1738 @@ if kpis.empty:
 
 
 # =============================================================================
-# FORMAT HELPERS
+# DISPLAY CONSTANTS
 # =============================================================================
 
+MISSING_TEXT = {
+    "",
+    "none",
+    "nan",
+    "nat",
+    "<na>",
+}
 
-# Safely convert one value to a number.
+
+PRODUCT_LABELS = {
+
+    "Gratuity":
+        "Gratuity",
+
+    "DB_Pension":
+        "DB Pension",
+
+    "DC_Superannuation":
+        "DC Superannuation",
+
+    "GTI":
+        "Group Term Insurance",
+
+    "EDLI":
+        "EDLI",
+}
+
+
+DISPLAY_LABELS = {
+
+    "plan_id":
+        "Plan",
+
+    "product_type":
+        "Product",
+
+    "active_members":
+        "Active Members",
+
+    "employee_id":
+        "Employee ID",
+
+    "employment_status":
+        "Status",
+
+    "department":
+        "Department",
+
+    "location":
+        "Location",
+
+    "grade":
+        "Grade",
+
+    "attained_age_years":
+        "Age",
+
+    "completed_service_years":
+        "Completed Service",
+
+    "gratuity_plan_id":
+        "Gratuity Plan",
+
+    "db_pension_plan_id":
+        "DB Pension Plan",
+
+    "dc_superannuation_plan_id":
+        "DC Superannuation Plan",
+
+    "gti_pricing_plan_id":
+        "GTI Plan",
+
+    "edli_plan_id":
+        "EDLI Plan",
+
+    "actuarial_liability":
+        "Actuarial Liability",
+
+    "puc_one_service_year_pv":
+        "PUC One-Service-Year PV",
+
+    "plan_assets":
+        "Plan Assets",
+
+    "funding_ratio_pct":
+        "Funding Ratio",
+
+    "funding_ratio":
+        "Funding Ratio",
+
+    "funding_deficit":
+        "Funding Deficit",
+
+    "funding_gap":
+        "Funding Gap",
+
+    "net_funded_position":
+        "Net Funded Position",
+
+    "annual_employer_contribution":
+        "Annual Employer Contribution",
+
+    "annual_employee_contribution":
+        "Annual Employee Contribution",
+
+    "current_annual_employer_contribution":
+        "Annual Employer Contribution",
+
+    "current_annual_employee_contribution":
+        "Annual Employee Contribution",
+
+    "projected_future_contribution_corpus":
+        "Future-Contribution Corpus",
+
+    "total_sum_assured":
+        "Total Sum Assured",
+
+    "gti_sum_assured":
+        "GTI Sum Assured",
+
+    "fresh_expected_claim_cost":
+        "Fresh Expected Claims",
+
+    "gti_fresh_expected_claim_cost":
+        "GTI Fresh Expected Claims",
+
+    "fresh_model_gross_premium":
+        "Fresh Gross Premium",
+
+    "gti_fresh_model_gross_premium":
+        "GTI Fresh Gross Premium",
+
+    "underwriting_referrals":
+        "FCL Referrals",
+
+    "gti_fcl_referral_rate":
+        "FCL Referral Rate",
+
+    "cover_above_free_cover_limit":
+        "Cover Above FCL",
+
+    "gti_cover_above_free_cover_limit":
+        "GTI Cover Above FCL",
+
+    "edli_part_b_lower_if_qualifying":
+        "EDLI Part B Lower",
+
+    "edli_part_b_upper_if_qualifying":
+        "EDLI Part B Upper",
+
+    "gratuity_dbo":
+        "Gratuity DBO",
+
+    "db_pension_liability":
+        "DB Pension DBO",
+
+    "combined_db_liability":
+        "Combined DB Liability",
+
+    "segment_type":
+        "Segment Type",
+
+    "segment_value":
+        "Segment",
+
+    "employee_count":
+        "Employees",
+
+    "portfolio_share_pct":
+        "Portfolio Share",
+
+    "governance_item":
+        "Governance Item",
+
+    "review_rows":
+        "Review Rows",
+
+    "treatment":
+        "Treatment",
+
+    "source_pipeline":
+        "Source Pipeline",
+
+    "dashboard_status":
+        "Status",
+
+    "check":
+        "Validation Check",
+
+    "exceptions":
+        "Exceptions",
+
+    "status":
+        "Status",
+
+    "note":
+        "Note",
+}
+
+
+# =============================================================================
+# GENERAL NUMERIC HELPERS
+# =============================================================================
+
 def to_number(
     value,
 ):
 
+    if value is None:
 
-    # Convert invalid values to NaN.
+        return np.nan
+
+    if isinstance(
+        value,
+        (
+            int,
+            float,
+            np.integer,
+            np.floating,
+        ),
+    ):
+
+        return float(
+            value
+        )
+
+    text = (
+        str(value)
+        .strip()
+        .replace(
+            ",",
+            "",
+        )
+    )
+
+    if text.lower() in MISSING_TEXT:
+
+        return np.nan
+
     return pd.to_numeric(
-        pd.Series([value]),
+        text,
         errors="coerce",
-    ).iloc[0]
-
-
-# Format Indian Rupee values compactly.
-def format_inr(
-    value,
-):
-
-
-    # Convert input.
-    value = to_number(
-        value
     )
 
 
-    # Missing value.
-    if pd.isna(
-        value
+def numeric_series(
+    df,
+    column,
+):
+
+    if column not in df.columns:
+
+        return pd.Series(
+            index=df.index,
+            dtype=float,
+        )
+
+    return pd.to_numeric(
+
+        df[
+            column
+        ]
+        .astype(
+            str
+        )
+        .str.replace(
+            ",",
+            "",
+            regex=False,
+        ),
+
+        errors="coerce",
+    )
+
+
+def safe_sum(
+    df,
+    column,
+):
+
+    if (
+        df.empty
+        or column not in df.columns
     ):
 
-        return "N/A"
+        return 0.0
 
+    return float(
 
-    # Billions.
-    if abs(value) >= 1_000_000_000:
-
-        return (
-            f"₹{value / 1_000_000_000:,.2f}B"
+        numeric_series(
+            df,
+            column,
         )
 
-
-    # Millions.
-    if abs(value) >= 1_000_000:
-
-        return (
-            f"₹{value / 1_000_000:,.2f}M"
+        .fillna(
+            0
         )
 
+        .sum()
+    )
 
-    # Thousands.
-    if abs(value) >= 1_000:
 
-        return (
-            f"₹{value / 1_000:,.2f}K"
+def nonempty_mask(
+    series,
+):
+
+    text = (
+        series
+        .astype(
+            str
         )
+        .str.strip()
+    )
 
-
-    # Small values.
     return (
-        f"₹{value:,.2f}"
+
+        series.notna()
+
+        &
+
+        ~text
+        .str.lower()
+        .isin(
+            MISSING_TEXT
+        )
     )
-
-
-# Format an integer.
-def format_integer(
-    value,
-):
-
-
-    # Convert input.
-    value = to_number(
-        value
-    )
-
-
-    # Missing.
-    if pd.isna(
-        value
-    ):
-
-        return "N/A"
-
-
-    # Return whole-number format.
-    return f"{int(round(value)):,}"
-
-
-# Format a ratio as percentage.
-def format_percentage(
-    value,
-):
-
-
-    # Convert input.
-    value = to_number(
-        value
-    )
-
-
-    # Missing.
-    if pd.isna(
-        value
-    ):
-
-        return "N/A"
-
-
-    # Pipeline 11 KPI ratio values remain decimal ratios.
-    return f"{value:.2%}"
 
 
 # =============================================================================
-# KPI LOOKUP
+# EMPLOYEE MEMBERSHIP HELPERS
 # =============================================================================
 
+def active_employee_frame(
+    df,
+):
 
-# Retrieve one KPI from dashboard_kpi_cards.csv.
+    if df.empty:
+
+        return df.copy()
+
+    if "employment_status" not in df.columns:
+
+        return df.copy()
+
+    status = (
+
+        df[
+            "employment_status"
+        ]
+
+        .astype(
+            str
+        )
+
+        .str.strip()
+
+        .str.lower()
+    )
+
+    return df.loc[
+        status.eq(
+            "active"
+        )
+    ].copy()
+
+
+def count_active_plan_members(
+    column_candidates,
+):
+
+    if employees.empty:
+
+        return 0
+
+    base = active_employee_frame(
+        employees
+    )
+
+    for column in column_candidates:
+
+        if column in base.columns:
+
+            return int(
+
+                nonempty_mask(
+                    base[
+                        column
+                    ]
+                )
+
+                .sum()
+            )
+
+    return 0
+
+
+# =============================================================================
+# KPI HELPERS
+# =============================================================================
+
 def get_kpi(
     kpi_id,
+    default=np.nan,
 ):
 
+    if (
 
-    # Find requested KPI row.
+        kpis.empty
+
+        or "kpi_id"
+        not in kpis.columns
+
+        or "numeric_value"
+        not in kpis.columns
+    ):
+
+        return default
+
     match = kpis.loc[
 
         kpis[
             "kpi_id"
-        ].eq(
+        ]
+        .astype(
+            str
+        )
+        .eq(
             kpi_id
         )
 
     ]
 
-
-    # Return missing if no row exists.
     if match.empty:
 
-        return np.nan
+        return default
+
+    value = to_number(
+
+        match[
+            "numeric_value"
+        ]
+        .iloc[
+            0
+        ]
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return default
+
+    return value
 
 
-    # Return numeric value.
-    return match[
-        "numeric_value"
-    ].iloc[0]
+def get_kpi_any(
+    kpi_ids,
+    default=np.nan,
+):
+
+    for kpi_id in kpi_ids:
+
+        value = get_kpi(
+            kpi_id,
+            default=np.nan,
+        )
+
+        if not pd.isna(
+            value
+        ):
+
+            return value
+
+    return default
 
 
-# Display a KPI using its correct format.
+# =============================================================================
+# PRODUCT HELPERS
+# =============================================================================
+
+def normalize_product(
+    value,
+):
+
+    return (
+
+        str(
+            value
+        )
+
+        .strip()
+
+        .lower()
+
+        .replace(
+            " ",
+            "_",
+        )
+
+        .replace(
+            "-",
+            "_",
+        )
+    )
+
+
+def product_frame(
+    df,
+    product_names,
+):
+
+    if (
+
+        df.empty
+
+        or "product_type"
+        not in df.columns
+    ):
+
+        return pd.DataFrame(
+            columns=df.columns
+        )
+
+    targets = {
+
+        normalize_product(
+            name
+        )
+
+        for name in product_names
+    }
+
+    normalized = (
+
+        df[
+            "product_type"
+        ]
+
+        .astype(
+            str
+        )
+
+        .map(
+            normalize_product
+        )
+    )
+
+    return df.loc[
+        normalized.isin(
+            targets
+        )
+    ].copy()
+
+
+def product_label(
+    value,
+):
+
+    text = str(
+        value
+    )
+
+    return PRODUCT_LABELS.get(
+
+        text,
+
+        text.replace(
+            "_",
+            " ",
+        ),
+    )
+
+
+# =============================================================================
+# BOOLEAN HELPERS
+# =============================================================================
+
+def truthy_mask(
+    series,
+):
+
+    return (
+
+        series
+        .astype(
+            str
+        )
+
+        .str.strip()
+
+        .str.lower()
+
+        .isin(
+            {
+                "true",
+                "1",
+                "yes",
+                "y",
+                "t",
+            }
+        )
+    )
+
+
+def yes_no(
+    value,
+):
+
+    if value is None:
+
+        return "—"
+
+    if (
+        isinstance(
+            value,
+            float,
+        )
+
+        and pd.isna(
+            value
+        )
+    ):
+
+        return "—"
+
+    text = (
+        str(
+            value
+        )
+        .strip()
+        .lower()
+    )
+
+    if text in MISSING_TEXT:
+
+        return "—"
+
+    if text in {
+
+        "true",
+        "1",
+        "yes",
+        "y",
+        "t",
+
+    }:
+
+        return "Yes"
+
+    if text in {
+
+        "false",
+        "0",
+        "no",
+        "n",
+        "f",
+
+    }:
+
+        return "No"
+
+    return str(
+        value
+    )
+
+
+# =============================================================================
+# COLUMN HELPERS
+# =============================================================================
+
+def first_existing_column(
+    df,
+    candidates,
+):
+
+    for column in candidates:
+
+        if column in df.columns:
+
+            return column
+
+    return None
+
+
+def select_existing(
+    df,
+    columns,
+):
+
+    return [
+
+        column
+
+        for column
+        in columns
+
+        if column
+        in df.columns
+    ]
+
+
+# =============================================================================
+# NUMBER FORMATTING
+# =============================================================================
+
+def format_integer(
+    value,
+):
+
+    value = to_number(
+        value
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return "—"
+
+    return f"{int(round(value)):,}"
+
+
+def format_decimal(
+    value,
+    digits=2,
+):
+
+    value = to_number(
+        value
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return "—"
+
+    return f"{value:,.{digits}f}"
+
+
+def format_inr_compact(
+    value,
+):
+
+    value = to_number(
+        value
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return "—"
+
+    sign = (
+        "-"
+        if value < 0
+        else ""
+    )
+
+    amount = abs(
+        value
+    )
+
+    if amount >= 1_000_000_000:
+
+        return (
+            f"{sign}₹"
+            f"{amount / 1_000_000_000:,.2f}B"
+        )
+
+    if amount >= 1_000_000:
+
+        return (
+            f"{sign}₹"
+            f"{amount / 1_000_000:,.2f}M"
+        )
+
+    if amount >= 1_000:
+
+        return (
+            f"{sign}₹"
+            f"{amount / 1_000:,.2f}K"
+        )
+
+    return (
+        f"{sign}₹{amount:,.2f}"
+    )
+
+
+def format_inr_exact(
+    value,
+):
+
+    value = to_number(
+        value
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return "—"
+
+    sign = (
+        "-"
+        if value < 0
+        else ""
+    )
+
+    return (
+        f"{sign}₹{abs(value):,.2f}"
+    )
+
+
+def format_percent(
+    value,
+    value_is_ratio=True,
+    digits=2,
+):
+
+    value = to_number(
+        value
+    )
+
+    if pd.isna(
+        value
+    ):
+
+        return "—"
+
+    if value_is_ratio:
+
+        pct = (
+            value
+            * 100
+        )
+
+    else:
+
+        pct = value
+
+    return (
+        f"{pct:,.{digits}f}%"
+    )
+
+
+# =============================================================================
+# PROFESSIONAL TABLE FORMATTER
+# =============================================================================
+
+def pretty_table(
+    df,
+    columns,
+    *,
+    labels=None,
+    money=None,
+    compact_money=None,
+    integers=None,
+    decimals=None,
+    pct_ratio=None,
+    pct_values=None,
+    booleans=None,
+    product_columns=None,
+):
+
+    labels = (
+        labels
+        or {}
+    )
+
+    money = set(
+        money
+        or []
+    )
+
+    compact_money = set(
+        compact_money
+        or []
+    )
+
+    integers = set(
+        integers
+        or []
+    )
+
+    decimals = (
+        decimals
+        or {}
+    )
+
+    pct_ratio = set(
+        pct_ratio
+        or []
+    )
+
+    pct_values = set(
+        pct_values
+        or []
+    )
+
+    booleans = set(
+        booleans
+        or []
+    )
+
+    product_columns = set(
+        product_columns
+        or []
+    )
+
+    selected = select_existing(
+        df,
+        columns,
+    )
+
+    out = df[
+        selected
+    ].copy()
+
+    for column in selected:
+
+        if column in money:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+                format_inr_exact
+            )
+
+        elif column in compact_money:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+                format_inr_compact
+            )
+
+        elif column in integers:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+                format_integer
+            )
+
+        elif column in decimals:
+
+            digits = decimals[
+                column
+            ]
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+
+                lambda x:
+                    format_decimal(
+                        x,
+                        digits,
+                    )
+            )
+
+        elif column in pct_ratio:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+
+                lambda x:
+                    format_percent(
+                        x,
+                        True,
+                    )
+            )
+
+        elif column in pct_values:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+
+                lambda x:
+                    format_percent(
+                        x,
+                        False,
+                    )
+            )
+
+        elif column in booleans:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+                yes_no
+            )
+
+        elif column in product_columns:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+                product_label
+            )
+
+        else:
+
+            out[
+                column
+            ] = out[
+                column
+            ].map(
+
+                lambda x:
+
+                    "—"
+
+                    if (
+
+                        x is None
+
+                        or (
+
+                            isinstance(
+                                x,
+                                float,
+                            )
+
+                            and pd.isna(
+                                x
+                            )
+                        )
+
+                        or str(
+                            x
+                        )
+                        .strip()
+                        .lower()
+                        in MISSING_TEXT
+
+                    )
+
+                    else str(
+                        x
+                    )
+            )
+
+    rename_map = {
+
+        column:
+
+            labels.get(
+
+                column,
+
+                DISPLAY_LABELS.get(
+
+                    column,
+
+                    column
+                    .replace(
+                        "_",
+                        " ",
+                    )
+                    .title(),
+                ),
+            )
+
+        for column
+        in selected
+    }
+
+    return out.rename(
+        columns=rename_map
+    )
+
+
+# =============================================================================
+# METRIC HELPER
+# =============================================================================
+
 def show_metric(
     label,
     value,
-    format_type="number",
+    kind="number",
 ):
 
+    if kind == "currency":
 
-    # Currency.
-    if format_type == "currency":
-
-        display_value = format_inr(
+        display = format_inr_compact(
             value
         )
 
+    elif kind == "integer":
 
-    # Percentage.
-    elif format_type == "percentage":
-
-        display_value = format_percentage(
+        display = format_integer(
             value
         )
 
+    elif kind == "ratio":
 
-    # Integer.
-    elif format_type == "integer":
-
-        display_value = format_integer(
-            value
+        display = format_percent(
+            value,
+            value_is_ratio=True,
         )
 
+    elif kind == "percentage":
 
-    # Generic number.
+        display = format_percent(
+            value,
+            value_is_ratio=False,
+        )
+
     else:
 
-        display_value = str(
+        numeric_value = to_number(
             value
         )
 
+        if pd.isna(
+            numeric_value
+        ):
 
-    # Render Streamlit metric.
+            display = "—"
+
+        else:
+
+            display = str(
+                value
+            )
+
     st.metric(
         label=label,
-        value=display_value,
+        value=display,
+    )
+
+
+# =============================================================================
+# CHART HELPER
+# =============================================================================
+
+def clean_chart(
+    fig,
+    *,
+    height=410,
+    y_title=None,
+    show_legend=None,
+):
+
+    fig.update_layout(
+
+        height=height,
+
+        margin=dict(
+            l=10,
+            r=10,
+            t=55,
+            b=10,
+        ),
+
+        hoverlabel=dict(
+            namelength=-1,
+        ),
+
+        legend_title_text="",
+    )
+
+    if y_title:
+
+        fig.update_yaxes(
+            title_text=y_title
+        )
+
+    if show_legend is not None:
+
+        fig.update_layout(
+            showlegend=show_legend
+        )
+
+    return fig
+
+
+# =============================================================================
+# FUNDED DB PLAN FILTER
+# =============================================================================
+
+def funded_db_plans():
+
+    if plans.empty:
+
+        return plans.copy()
+
+    if "funded_db_product_flag" in plans.columns:
+
+        mask = truthy_mask(
+
+            plans[
+                "funded_db_product_flag"
+            ]
+        )
+
+        funded_result = plans.loc[
+            mask
+        ].copy()
+
+        if not funded_result.empty:
+
+            return funded_result
+
+    return product_frame(
+
+        plans,
+
+        [
+            "Gratuity",
+            "DB_Pension",
+            "DB Pension",
+        ],
+    )
+
+
+# =============================================================================
+# GOVERNED VALUATION DATE
+# =============================================================================
+
+def infer_valuation_date():
+
+    for df in [
+
+        manifest,
+        plans,
+        products,
+        kpis,
+
+    ]:
+
+        if df.empty:
+
+            continue
+
+        column = first_existing_column(
+
+            df,
+
+            [
+                "valuation_date",
+                "as_of_date",
+                "data_date",
+            ],
+        )
+
+        if column:
+
+            values = (
+                df[
+                    column
+                ]
+                .dropna()
+            )
+
+            if not values.empty:
+
+                parsed = pd.to_datetime(
+
+                    values.iloc[
+                        0
+                    ],
+
+                    errors="coerce",
+                )
+
+                if not pd.isna(
+                    parsed
+                ):
+
+                    return (
+
+                        f"{parsed.day} "
+                        f"{parsed.strftime('%B %Y')}"
+                    )
+
+    return "1 September 2026"
+
+
+# =============================================================================
+# PIPELINE VERSION
+# =============================================================================
+
+def infer_pipeline_version():
+
+    for df in [
+
+        validation,
+        governance,
+        plans,
+        products,
+        manifest,
+
+    ]:
+
+        if df.empty:
+
+            continue
+
+        column = first_existing_column(
+
+            df,
+
+            [
+                "pipeline_11_version",
+                "dashboard_mart_version",
+                "version",
+            ],
+        )
+
+        if column:
+
+            values = (
+
+                df[
+                    column
+                ]
+
+                .dropna()
+
+                .astype(
+                    str
+                )
+            )
+
+            values = values.loc[
+
+                ~values
+
+                .str.strip()
+
+                .str.lower()
+
+                .isin(
+                    MISSING_TEXT
+                )
+
+            ]
+
+            if not values.empty:
+
+                return values.iloc[
+                    0
+                ]
+
+    return "P11-C01"
+
+
+VALUATION_DATE = infer_valuation_date()
+
+DASHBOARD_VERSION = infer_pipeline_version()
+
+
+# =============================================================================
+# PORTFOLIO MEMBER COUNTS
+# =============================================================================
+
+active_employees = get_kpi_any(
+
+    [
+        "active_employees",
+    ],
+
+    default=len(
+        active_employee_frame(
+            employees
+        )
+    ),
+)
+
+
+gratuity_members = get_kpi_any(
+
+    [
+        "gratuity_members",
+        "active_gratuity_members",
+    ],
+
+    default=count_active_plan_members(
+        [
+            "gratuity_plan_id",
+        ]
+    ),
+)
+
+
+db_pension_members = get_kpi_any(
+
+    [
+        "db_pension_members",
+        "active_db_pension_members",
+    ],
+
+    default=count_active_plan_members(
+        [
+            "db_pension_plan_id",
+        ]
+    ),
+)
+
+
+dc_members = get_kpi_any(
+
+    [
+        "dc_members",
+        "active_dc_members",
+    ],
+
+    default=count_active_plan_members(
+        [
+            "dc_superannuation_plan_id",
+        ]
+    ),
+)
+
+
+edli_members = get_kpi_any(
+
+    [
+        "edli_members",
+        "active_edli_members",
+    ],
+
+    default=count_active_plan_members(
+        [
+            "edli_plan_id",
+        ]
+    ),
+)
+
+
+gti_members = get_kpi_any(
+
+    [
+        "gti_members",
+        "active_gti_members",
+    ],
+
+    default=count_active_plan_members(
+
+        [
+            "gti_pricing_plan_id",
+            "gti_plan_id",
+        ]
+    ),
+)
+
+
+# =============================================================================
+# PRODUCT FRAMES
+# =============================================================================
+
+funded = funded_db_plans()
+
+
+dc_plans = product_frame(
+
+    plans,
+
+    [
+        "DC_Superannuation",
+        "DC Superannuation",
+    ],
+)
+
+
+gti_plans = product_frame(
+
+    plans,
+
+    [
+        "GTI",
+    ],
+)
+
+
+edli_plans = product_frame(
+
+    plans,
+
+    [
+        "EDLI",
+    ],
+)
+
+
+# =============================================================================
+# PORTFOLIO DB METRICS
+# =============================================================================
+
+combined_db_liability = get_kpi_any(
+
+    [
+        "combined_db_liability",
+    ],
+
+    default=safe_sum(
+        funded,
+        "actuarial_liability",
+    ),
+)
+
+
+combined_db_assets = get_kpi_any(
+
+    [
+        "combined_db_assets",
+        "combined_db_plan_assets",
+    ],
+
+    default=safe_sum(
+        funded,
+        "plan_assets",
+    ),
+)
+
+
+combined_db_funding_ratio = get_kpi_any(
+
+    [
+        "combined_db_funding_ratio",
+    ],
+
+    default=(
+
+        combined_db_assets
+        /
+        combined_db_liability
+
+        if combined_db_liability > 0
+
+        else np.nan
+    ),
+)
+
+
+combined_db_funding_deficit = get_kpi_any(
+
+    [
+        "combined_db_funding_deficit",
+    ],
+
+    default=max(
+
+        combined_db_liability
+        -
+        combined_db_assets,
+
+        0,
+    ),
+)
+
+
+# =============================================================================
+# DC METRICS
+# =============================================================================
+
+dc_employer_contribution = get_kpi_any(
+
+    [
+        "dc_annual_employer_contributions",
+        "annual_dc_employer_contributions",
+    ],
+
+    default=safe_sum(
+        dc_plans,
+        "annual_employer_contribution",
+    ),
+)
+
+
+dc_employee_contribution = get_kpi_any(
+
+    [
+        "dc_annual_employee_contributions",
+        "annual_dc_employee_contributions",
+    ],
+
+    default=safe_sum(
+        dc_plans,
+        "annual_employee_contribution",
+    ),
+)
+
+
+dc_future_corpus = get_kpi_any(
+
+    [
+        "dc_future_corpus",
+        "dc_future_contribution_corpus",
+    ],
+
+    default=safe_sum(
+        dc_plans,
+        "projected_future_contribution_corpus",
+    ),
+)
+
+
+# =============================================================================
+# GTI METRICS
+# =============================================================================
+
+gti_total_sum_assured = get_kpi_any(
+
+    [
+        "gti_total_sum_assured",
+    ],
+
+    default=safe_sum(
+        gti_plans,
+        "total_sum_assured",
+    ),
+)
+
+
+gti_expected_claims = get_kpi_any(
+
+    [
+        "gti_expected_claims",
+        "gti_fresh_expected_claims",
+    ],
+
+    default=safe_sum(
+        gti_plans,
+        "fresh_expected_claim_cost",
+    ),
+)
+
+
+gti_fresh_gross_premium = get_kpi_any(
+
+    [
+        "gti_fresh_gross_premium",
+        "gti_fresh_model_gross_premium",
+    ],
+
+    default=safe_sum(
+        gti_plans,
+        "fresh_model_gross_premium",
+    ),
+)
+
+
+gti_fcl_referrals = get_kpi_any(
+
+    [
+        "gti_fcl_referrals",
+    ],
+
+    default=safe_sum(
+        gti_plans,
+        "underwriting_referrals",
+    ),
+)
+
+
+gti_fcl_referral_rate = get_kpi_any(
+
+    [
+        "gti_fcl_referral_rate",
+    ],
+
+    default=(
+
+        gti_fcl_referrals
+        /
+        gti_members
+
+        if gti_members
+
+        else np.nan
+    ),
+)
+
+
+# =============================================================================
+# VALIDATION STATUS
+# =============================================================================
+
+validation_failure_count = 0
+
+
+if (
+
+    not validation.empty
+
+    and "status"
+    in validation.columns
+):
+
+    validation_failure_count = int(
+
+        validation[
+            "status"
+        ]
+
+        .astype(
+            str
+        )
+
+        .str.upper()
+
+        .eq(
+            "FAIL"
+        )
+
+        .sum()
     )
 
 
@@ -438,20 +1913,16 @@ def show_metric(
 # SIDEBAR
 # =============================================================================
 
-
-# Dashboard identity.
 st.sidebar.title(
     "Hessian-AI"
 )
 
 
-# Dashboard subtitle.
 st.sidebar.caption(
     "Quantitative Actuarial Employee Benefits Dashboard"
 )
 
 
-# Navigation pages.
 page = st.sidebar.radio(
 
     "Navigation",
@@ -475,148 +1946,136 @@ page = st.sidebar.radio(
 )
 
 
-# Divider.
 st.sidebar.divider()
 
 
-# Display master valuation date.
 st.sidebar.markdown(
     "**Valuation Date**"
 )
 
+
 st.sidebar.write(
-    "1 September 2026"
+    VALUATION_DATE
 )
 
 
-# Display data layer.
 st.sidebar.markdown(
     "**Data Layer**"
 )
 
+
 st.sidebar.write(
-    "Pipeline 11 — P11-C01"
+    f"Pipeline 11 — {DASHBOARD_VERSION}"
 )
 
 
-# Display modeling status.
-st.sidebar.success(
-    "Portfolio validation passed"
-)
+if validation_failure_count == 0:
+
+    st.sidebar.success(
+        "Portfolio validation passed"
+    )
+
+else:
+
+    st.sidebar.error(
+
+        f"{validation_failure_count} "
+        f"validation failure(s)"
+    )
 
 
 # =============================================================================
-# MAIN HEADER
+# COMMON PAGE HEADER
 # =============================================================================
 
-
-# Main application title.
 st.title(
     "Quantitative Actuarial Employee Benefits Dashboard"
 )
 
 
-# Explain dashboard scope.
 st.caption(
-    "Gratuity • Superannuation • DB Pension • EDLI • "
-    "Group Term Insurance • Funding • Risk • Governance"
+    "Gratuity · Superannuation · DB Pension · EDLI · "
+    "Group Term Insurance · Funding · Risk · Governance"
 )
 
 
 # =============================================================================
-# PAGE 1 - EXECUTIVE OVERVIEW
+# PAGE 1
+# EXECUTIVE OVERVIEW
 # =============================================================================
-
 
 if page == "Executive Overview":
 
 
-    # Page heading.
     st.header(
         "Executive Overview"
     )
 
 
     # -------------------------------------------------------------------------
-    # WORKFORCE
+    # COVERED WORKFORCE
     # -------------------------------------------------------------------------
-
 
     st.subheader(
         "Covered Workforce"
     )
 
 
-    # Create six KPI columns.
     cols = st.columns(
         6
     )
 
 
-    # Active employees.
     with cols[0]:
 
         show_metric(
             "Active Employees",
-            get_kpi(
-                "active_employees"
-            ),
+            active_employees,
             "integer",
         )
 
 
-    # Gratuity.
     with cols[1]:
 
         show_metric(
             "Gratuity",
-            get_kpi(
-                "gratuity_members"
-            ),
+            gratuity_members,
             "integer",
         )
 
 
-    # DB Pension.
     with cols[2]:
 
         show_metric(
             "DB Pension",
-            get_kpi(
-                "db_pension_members"
-            ),
+            db_pension_members,
             "integer",
         )
 
 
-    # DC.
     with cols[3]:
 
         show_metric(
             "DC Superannuation",
-            get_kpi(
-                "dc_members"
-            ),
+            dc_members,
             "integer",
         )
 
 
-    # EDLI.
     with cols[4]:
 
         show_metric(
             "EDLI",
-            8501,
+            edli_members,
             "integer",
         )
 
 
-    # GTI.
     with cols[5]:
 
         show_metric(
             "GTI",
-            7913,
+            gti_members,
             "integer",
         )
 
@@ -625,13 +2084,11 @@ if page == "Executive Overview":
     # DEFINED BENEFIT FUNDING
     # -------------------------------------------------------------------------
 
-
     st.subheader(
         "Defined Benefit Funding"
     )
 
 
-    # Four DB financial metrics.
     cols = st.columns(
         4
     )
@@ -641,9 +2098,7 @@ if page == "Executive Overview":
 
         show_metric(
             "Combined DB Liability",
-            get_kpi(
-                "combined_db_liability"
-            ),
+            combined_db_liability,
             "currency",
         )
 
@@ -652,9 +2107,7 @@ if page == "Executive Overview":
 
         show_metric(
             "DB Plan Assets",
-            get_kpi(
-                "combined_db_assets"
-            ),
+            combined_db_assets,
             "currency",
         )
 
@@ -663,10 +2116,8 @@ if page == "Executive Overview":
 
         show_metric(
             "Funding Ratio",
-            get_kpi(
-                "combined_db_funding_ratio"
-            ),
-            "percentage",
+            combined_db_funding_ratio,
+            "ratio",
         )
 
 
@@ -674,9 +2125,7 @@ if page == "Executive Overview":
 
         show_metric(
             "Funding Deficit",
-            get_kpi(
-                "combined_db_funding_deficit"
-            ),
+            combined_db_funding_deficit,
             "currency",
         )
 
@@ -684,7 +2133,6 @@ if page == "Executive Overview":
     # -------------------------------------------------------------------------
     # GROUP RISK
     # -------------------------------------------------------------------------
-
 
     st.subheader(
         "Group Risk"
@@ -700,9 +2148,7 @@ if page == "Executive Overview":
 
         show_metric(
             "GTI Sum Assured",
-            get_kpi(
-                "gti_total_sum_assured"
-            ),
+            gti_total_sum_assured,
             "currency",
         )
 
@@ -711,9 +2157,7 @@ if page == "Executive Overview":
 
         show_metric(
             "Expected Claims",
-            get_kpi(
-                "gti_expected_claims"
-            ),
+            gti_expected_claims,
             "currency",
         )
 
@@ -722,9 +2166,7 @@ if page == "Executive Overview":
 
         show_metric(
             "Fresh Gross Premium",
-            get_kpi(
-                "gti_fresh_gross_premium"
-            ),
+            gti_fresh_gross_premium,
             "currency",
         )
 
@@ -733,9 +2175,7 @@ if page == "Executive Overview":
 
         show_metric(
             "FCL Referrals",
-            get_kpi(
-                "gti_fcl_referrals"
-            ),
+            gti_fcl_referrals,
             "integer",
         )
 
@@ -744,285 +2184,233 @@ if page == "Executive Overview":
 
         show_metric(
             "FCL Referral Rate",
-            get_kpi(
-                "gti_fcl_referral_rate"
-            ),
-            "percentage",
+            gti_fcl_referral_rate,
+            "ratio",
         )
 
 
     # -------------------------------------------------------------------------
-    # DEFINED BENEFIT PRODUCT CHART
+    # DB PRODUCT CHART
     # -------------------------------------------------------------------------
-
 
     st.subheader(
         "Defined Benefit Liability by Product"
     )
 
 
-    # Keep Gratuity and DB Pension.
-    db_products = products.loc[
+    if (
 
-        products[
+        not products.empty
+
+        and {
+
+            "product_type",
+            "actuarial_liability",
+
+        }.issubset(
+            products.columns
+        )
+    ):
+
+        db_products = product_frame(
+
+            products,
+
+            [
+                "Gratuity",
+                "DB_Pension",
+                "DB Pension",
+            ],
+        )
+
+
+        chart_df = db_products[
+
+            [
+                "product_type",
+                "actuarial_liability",
+            ]
+
+        ].copy()
+
+
+        chart_df[
+            "actuarial_liability"
+        ] = numeric_series(
+
+            chart_df,
+
+            "actuarial_liability",
+        )
+
+
+        chart_df = chart_df.dropna(
+
+            subset=[
+                "actuarial_liability",
+            ]
+        )
+
+
+    else:
+
+        chart_df = pd.DataFrame()
+
+
+        if (
+
+            not funded.empty
+
+            and "product_type"
+            in funded.columns
+        ):
+
+            fallback = funded.copy()
+
+
+            fallback[
+                "actuarial_liability"
+            ] = numeric_series(
+
+                fallback,
+
+                "actuarial_liability",
+            )
+
+
+            chart_df = (
+
+                fallback
+
+                .groupby(
+                    "product_type",
+                    as_index=False,
+                )[
+                    "actuarial_liability"
+                ]
+
+                .sum()
+            )
+
+
+    if not chart_df.empty:
+
+
+        chart_df[
+            "Product"
+        ] = chart_df[
             "product_type"
-        ].isin([
-
-            "Gratuity",
-
-            "DB_Pension",
-        ])
-
-    ].copy()
+        ].map(
+            product_label
+        )
 
 
-    # Draw chart when data exist.
-    if not db_products.empty:
+        chart_df[
+            "Display Value"
+        ] = chart_df[
+            "actuarial_liability"
+        ].map(
+            format_inr_compact
+        )
 
 
         fig = px.bar(
 
-            db_products,
+            chart_df,
 
-            x="product_type",
+            x="Product",
 
             y="actuarial_liability",
 
-            labels={
+            text="Display Value",
 
-                "product_type":
-                    "Product",
+            category_orders={
 
-                "actuarial_liability":
-                    "Actuarial Liability (INR)",
+                "Product": [
+                    "Gratuity",
+                    "DB Pension",
+                ]
             },
 
-            title=(
-                "Gratuity vs DB Pension Liability"
+            labels={
+
+                "actuarial_liability":
+                    "Actuarial Liability (INR)"
+            },
+
+            title="Gratuity vs DB Pension Liability",
+        )
+
+
+        fig.update_traces(
+
+            textposition="outside",
+
+            hovertemplate=(
+
+                "<b>%{x}</b>"
+                "<br>Liability: ₹%{y:,.2f}"
+                "<extra></extra>"
             ),
         )
 
 
-        # Display interactive chart.
+        clean_chart(
+
+            fig,
+
+            height=430,
+
+            y_title="Actuarial Liability (INR)",
+
+            show_legend=False,
+        )
+
+
         st.plotly_chart(
 
             fig,
 
-            use_container_width=True
+            use_container_width=True,
         )
 
 
 # =============================================================================
-# PAGE 2 - FUNDING AND LIABILITIES
+# PAGE 2
+# FUNDING & LIABILITIES
 # =============================================================================
-
 
 elif page == "Funding & Liabilities":
 
 
-    # Page heading.
     st.header(
         "Defined Benefit Funding & Liabilities"
     )
 
 
-    # Keep funded DB products only.
-    funded = plans.loc[
-
-        plans[
-            "funded_db_product_flag"
-        ].fillna(
-            False
-        )
-
-    ].copy()
-
-
     # -------------------------------------------------------------------------
-    # LIABILITY VS ASSETS
+    # PORTFOLIO FUNDING KPI CARDS
     # -------------------------------------------------------------------------
-
-
-    if not funded.empty:
-
-
-        # Create grouped bar chart.
-        fig = go.Figure()
-
-
-        # Liability bars.
-        fig.add_bar(
-
-            name="Actuarial Liability",
-
-            x=funded[
-                "plan_id"
-            ],
-
-            y=funded[
-                "actuarial_liability"
-            ],
-        )
-
-
-        # Asset bars.
-        fig.add_bar(
-
-            name="Plan Assets",
-
-            x=funded[
-                "plan_id"
-            ],
-
-            y=funded[
-                "plan_assets"
-            ],
-        )
-
-
-        # Group the two bars.
-        fig.update_layout(
-
-            barmode="group",
-
-            title=(
-                "Plan Liability vs Funded Assets"
-            ),
-
-            xaxis_title="Plan",
-
-            yaxis_title="INR",
-        )
-
-
-        # Display chart.
-        st.plotly_chart(
-
-            fig,
-
-            use_container_width=True
-        )
-
-
-        # ---------------------------------------------------------------------
-        # FUNDING RATIO
-        # ---------------------------------------------------------------------
-
-
-        fig = px.bar(
-
-            funded,
-
-            x="plan_id",
-
-            y="funding_ratio_pct",
-
-            labels={
-
-                "plan_id":
-                    "Plan",
-
-                "funding_ratio_pct":
-                    "Funding Ratio (%)",
-            },
-
-            title="Funding Ratio by Plan",
-        )
-
-
-        # Display.
-        st.plotly_chart(
-
-            fig,
-
-            use_container_width=True
-        )
-
-
-        # Display source table.
-        st.subheader(
-            "Plan Funding Detail"
-        )
-
-
-        st.dataframe(
-
-            funded,
-
-            use_container_width=True,
-
-            hide_index=True,
-        )
-
-
-# =============================================================================
-# PAGE 3 - DC SUPERANNUATION
-# =============================================================================
-
-
-elif page == "DC Superannuation":
-
-
-    # Page heading.
-    st.header(
-        "Defined Contribution Superannuation"
-    )
-
-
-    # Keep DC plans.
-    dc = plans.loc[
-
-        plans[
-            "product_type"
-        ].eq(
-            "DC_Superannuation"
-        )
-
-    ].copy()
-
-
-    # -------------------------------------------------------------------------
-    # COMPANY-LEVEL DC KPIs
-    # -------------------------------------------------------------------------
-
 
     cols = st.columns(
-        3
+        4
     )
 
 
     with cols[0]:
 
         show_metric(
-            "DC Members",
-            get_kpi(
-                "dc_members"
-            ),
-            "integer",
+            "Combined DB Liability",
+            combined_db_liability,
+            "currency",
         )
-
-
-    # Employer contributions from plan data.
-    employer_contribution = (
-
-        pd.to_numeric(
-
-            dc.get(
-                "annual_employer_contribution",
-                pd.Series(dtype=float),
-            ),
-
-            errors="coerce"
-
-        ).sum()
-    )
 
 
     with cols[1]:
 
         show_metric(
-            "Annual Employer Contributions",
-            employer_contribution,
+            "DB Plan Assets",
+            combined_db_assets,
             "currency",
         )
 
@@ -1030,29 +2418,426 @@ elif page == "DC Superannuation":
     with cols[2]:
 
         show_metric(
-            "Future-Contribution Corpus",
-            get_kpi(
-                "dc_future_corpus"
-            ),
+            "Funding Ratio",
+            combined_db_funding_ratio,
+            "ratio",
+        )
+
+
+    with cols[3]:
+
+        show_metric(
+            "Funding Deficit",
+            combined_db_funding_deficit,
             "currency",
         )
 
 
-    # -------------------------------------------------------------------------
-    # FUTURE CORPUS BY PLAN
-    # -------------------------------------------------------------------------
+    if funded.empty:
 
 
-    if not dc.empty:
+        st.warning(
+            "No funded Defined Benefit plans are available "
+            "in the dashboard data mart."
+        )
+
+
+    else:
+
+
+        funded_view = funded.copy()
+
+
+        if (
+
+            "funding_ratio_pct"
+            not in funded_view.columns
+
+            and "funding_ratio"
+            in funded_view.columns
+        ):
+
+            funded_view[
+                "funding_ratio_pct"
+            ] = (
+
+                numeric_series(
+                    funded_view,
+                    "funding_ratio",
+                )
+
+                * 100
+            )
+
+
+        # ---------------------------------------------------------------------
+        # LIABILITY VS ASSETS
+        # ---------------------------------------------------------------------
+
+        st.subheader(
+            "Liability vs Plan Assets"
+        )
+
+
+        fig = go.Figure()
+
+
+        fig.add_bar(
+
+            name="Actuarial Liability",
+
+            x=funded_view[
+                "plan_id"
+            ],
+
+            y=numeric_series(
+                funded_view,
+                "actuarial_liability",
+            ),
+
+            hovertemplate=(
+
+                "<b>%{x}</b>"
+                "<br>Liability: ₹%{y:,.2f}"
+                "<extra></extra>"
+            ),
+        )
+
+
+        fig.add_bar(
+
+            name="Plan Assets",
+
+            x=funded_view[
+                "plan_id"
+            ],
+
+            y=numeric_series(
+                funded_view,
+                "plan_assets",
+            ),
+
+            hovertemplate=(
+
+                "<b>%{x}</b>"
+                "<br>Assets: ₹%{y:,.2f}"
+                "<extra></extra>"
+            ),
+        )
+
+
+        fig.update_layout(
+
+            barmode="group",
+
+            xaxis_title="Plan",
+        )
+
+
+        clean_chart(
+
+            fig,
+
+            height=410,
+
+            y_title="INR",
+        )
+
+
+        st.plotly_chart(
+
+            fig,
+
+            use_container_width=True,
+        )
+
+
+        # ---------------------------------------------------------------------
+        # FUNDING RATIO BY PLAN
+        # ---------------------------------------------------------------------
+
+        if "funding_ratio_pct" in funded_view.columns:
+
+
+            st.subheader(
+                "Funding Ratio by Plan"
+            )
+
+
+            ratio_df = funded_view.copy()
+
+
+            ratio_df[
+                "funding_ratio_pct"
+            ] = numeric_series(
+
+                ratio_df,
+
+                "funding_ratio_pct",
+            )
+
+
+            ratio_df[
+                "Display Ratio"
+            ] = ratio_df[
+                "funding_ratio_pct"
+            ].map(
+
+                lambda x:
+
+                    format_percent(
+                        x,
+                        value_is_ratio=False,
+                    )
+            )
+
+
+            fig = px.bar(
+
+                ratio_df,
+
+                x="plan_id",
+
+                y="funding_ratio_pct",
+
+                text="Display Ratio",
+
+                labels={
+
+                    "plan_id":
+                        "Plan",
+
+                    "funding_ratio_pct":
+                        "Funding Ratio (%)",
+                },
+            )
+
+
+            fig.update_traces(
+
+                textposition="outside",
+
+                hovertemplate=(
+
+                    "<b>%{x}</b>"
+                    "<br>Funding Ratio: %{y:.2f}%"
+                    "<extra></extra>"
+                ),
+            )
+
+
+            clean_chart(
+
+                fig,
+
+                height=390,
+
+                y_title="Funding Ratio (%)",
+
+                show_legend=False,
+            )
+
+
+            st.plotly_chart(
+
+                fig,
+
+                use_container_width=True,
+            )
+
+
+        # ---------------------------------------------------------------------
+        # PROFESSIONAL DB FUNDING TABLE
+        # ---------------------------------------------------------------------
+
+        st.subheader(
+            "Plan Funding Detail"
+        )
+
+
+        funding_columns = [
+
+            "plan_id",
+
+            "product_type",
+
+            "active_members",
+
+            "actuarial_liability",
+
+            "puc_one_service_year_pv",
+
+            "plan_assets",
+
+            "funding_ratio_pct",
+
+            "funding_deficit",
+
+            "net_funded_position",
+        ]
+
+
+        funding_table = pretty_table(
+
+            funded_view,
+
+            funding_columns,
+
+            money={
+
+                "actuarial_liability",
+
+                "puc_one_service_year_pv",
+
+                "plan_assets",
+
+                "funding_deficit",
+
+                "net_funded_position",
+            },
+
+            integers={
+
+                "active_members",
+            },
+
+            pct_values={
+
+                "funding_ratio_pct",
+            },
+
+            product_columns={
+
+                "product_type",
+            },
+        )
+
+
+        st.dataframe(
+
+            funding_table,
+
+            use_container_width=True,
+
+            hide_index=True,
+        )
+
+
+        st.caption(
+            "Funding tables intentionally exclude DC, GTI and EDLI "
+            "fields because those measures have different financial meanings."
+        )
+
+
+# =============================================================================
+# PAGE 3
+# DEFINED CONTRIBUTION SUPERANNUATION
+# =============================================================================
+
+elif page == "DC Superannuation":
+
+
+    st.header(
+        "Defined Contribution Superannuation"
+    )
+
+
+    # -------------------------------------------------------------------------
+    # DC KPI CARDS
+    # -------------------------------------------------------------------------
+
+    cols = st.columns(
+        4
+    )
+
+
+    with cols[0]:
+
+        show_metric(
+            "DC Members",
+            dc_members,
+            "integer",
+        )
+
+
+    with cols[1]:
+
+        show_metric(
+            "Annual Employer Contributions",
+            dc_employer_contribution,
+            "currency",
+        )
+
+
+    with cols[2]:
+
+        show_metric(
+            "Annual Employee Contributions",
+            dc_employee_contribution,
+            "currency",
+        )
+
+
+    with cols[3]:
+
+        show_metric(
+            "Future-Contribution Corpus",
+            dc_future_corpus,
+            "currency",
+        )
+
+
+    if dc_plans.empty:
+
+
+        st.warning(
+            "No Defined Contribution Superannuation plans are available."
+        )
+
+
+    else:
+
+
+        # ---------------------------------------------------------------------
+        # FUTURE CORPUS CHART
+        # ---------------------------------------------------------------------
+
+        st.subheader(
+            "Projected Future-Contribution Corpus by DC Plan"
+        )
+
+
+        dc_chart = dc_plans.copy()
+
+
+        dc_chart[
+            "projected_future_contribution_corpus"
+        ] = numeric_series(
+
+            dc_chart,
+
+            "projected_future_contribution_corpus",
+        )
+
+
+        dc_chart[
+            "Display Corpus"
+        ] = dc_chart[
+            "projected_future_contribution_corpus"
+        ].map(
+            format_inr_compact
+        )
 
 
         fig = px.bar(
 
-            dc,
+            dc_chart,
 
             x="plan_id",
 
             y="projected_future_contribution_corpus",
+
+            text="Display Corpus",
 
             labels={
 
@@ -1062,10 +2847,31 @@ elif page == "DC Superannuation":
                 "projected_future_contribution_corpus":
                     "Future-Contribution Corpus (INR)",
             },
+        )
 
-            title=(
-                "Projected Future-Contribution Corpus by DC Plan"
+
+        fig.update_traces(
+
+            textposition="outside",
+
+            hovertemplate=(
+
+                "<b>%{x}</b>"
+                "<br>Future Corpus: ₹%{y:,.2f}"
+                "<extra></extra>"
             ),
+        )
+
+
+        clean_chart(
+
+            fig,
+
+            height=420,
+
+            y_title="Future-Contribution Corpus (INR)",
+
+            show_legend=False,
         )
 
 
@@ -1073,41 +2879,58 @@ elif page == "DC Superannuation":
 
             fig,
 
-            use_container_width=True
+            use_container_width=True,
         )
 
 
-        # Contribution comparison.
-        contribution_columns = [
-
-            column
-
-            for column in [
-
-                "plan_id",
-
-                "annual_employer_contribution",
-
-                "annual_employee_contribution",
-
-                "projected_future_contribution_corpus",
-            ]
-
-            if column
-            in dc.columns
-        ]
-
+        # ---------------------------------------------------------------------
+        # PROFESSIONAL DC TABLE
+        # ---------------------------------------------------------------------
 
         st.subheader(
             "DC Plan Detail"
         )
 
 
+        dc_columns = [
+
+            "plan_id",
+
+            "active_members",
+
+            "annual_employer_contribution",
+
+            "annual_employee_contribution",
+
+            "projected_future_contribution_corpus",
+        ]
+
+
+        dc_table = pretty_table(
+
+            dc_plans,
+
+            dc_columns,
+
+            money={
+
+                "annual_employer_contribution",
+
+                "annual_employee_contribution",
+
+                "projected_future_contribution_corpus",
+            },
+
+            integers={
+
+                "active_members",
+            },
+        )
+
+
         st.dataframe(
 
-            dc[
-                contribution_columns
-            ],
+            dc_table,
 
             use_container_width=True,
 
@@ -1115,7 +2938,6 @@ elif page == "DC Superannuation":
         )
 
 
-    # Explicit model limitation.
     st.info(
         "Projected DC values represent the future-contribution corpus. "
         "Opening individual member corpus was not available and is not "
@@ -1124,44 +2946,29 @@ elif page == "DC Superannuation":
 
 
 # =============================================================================
-# PAGE 4 - GROUP RISK
+# PAGE 4
+# GROUP RISK — GTI & EDLI
 # =============================================================================
-
 
 elif page == "Group Risk — GTI & EDLI":
 
 
-    # Page heading.
     st.header(
         "Group Risk — GTI & EDLI"
     )
 
 
-    # -------------------------------------------------------------------------
-    # GTI SECTION
-    # -------------------------------------------------------------------------
-
+    # =========================================================================
+    # GTI
+    # =========================================================================
 
     st.subheader(
         "Group Term Insurance"
     )
 
 
-    # Keep GTI plans.
-    gti = plans.loc[
-
-        plans[
-            "product_type"
-        ].eq(
-            "GTI"
-        )
-
-    ].copy()
-
-
-    # KPI cards.
     cols = st.columns(
-        4
+        5
     )
 
 
@@ -1169,9 +2976,7 @@ elif page == "Group Risk — GTI & EDLI":
 
         show_metric(
             "Total Sum Assured",
-            get_kpi(
-                "gti_total_sum_assured"
-            ),
+            gti_total_sum_assured,
             "currency",
         )
 
@@ -1180,9 +2985,7 @@ elif page == "Group Risk — GTI & EDLI":
 
         show_metric(
             "Fresh Expected Claims",
-            get_kpi(
-                "gti_expected_claims"
-            ),
+            gti_expected_claims,
             "currency",
         )
 
@@ -1191,9 +2994,7 @@ elif page == "Group Risk — GTI & EDLI":
 
         show_metric(
             "Fresh Gross Premium",
-            get_kpi(
-                "gti_fresh_gross_premium"
-            ),
+            gti_fresh_gross_premium,
             "currency",
         )
 
@@ -1202,84 +3003,237 @@ elif page == "Group Risk — GTI & EDLI":
 
         show_metric(
             "FCL Referrals",
-            get_kpi(
-                "gti_fcl_referrals"
-            ),
+            gti_fcl_referrals,
             "integer",
         )
 
 
-    # GTI Sum Assured chart.
-    if not gti.empty:
+    with cols[4]:
+
+        show_metric(
+            "FCL Referral Rate",
+            gti_fcl_referral_rate,
+            "ratio",
+        )
+
+
+    if not gti_plans.empty:
+
+
+        # ---------------------------------------------------------------------
+        # TWO-COLUMN GTI CHART AREA
+        # ---------------------------------------------------------------------
+
+        left, right = st.columns(
+            2
+        )
+
+
+        # ---------------------------------------------------------------------
+        # SUM ASSURED
+        # ---------------------------------------------------------------------
+
+        with left:
+
+
+            gti_sa = gti_plans.copy()
+
+
+            gti_sa[
+                "total_sum_assured"
+            ] = numeric_series(
+
+                gti_sa,
+
+                "total_sum_assured",
+            )
+
+
+            gti_sa[
+                "Display SA"
+            ] = gti_sa[
+                "total_sum_assured"
+            ].map(
+                format_inr_compact
+            )
+
+
+            fig = px.bar(
+
+                gti_sa,
+
+                x="plan_id",
+
+                y="total_sum_assured",
+
+                text="Display SA",
+
+                labels={
+
+                    "plan_id":
+                        "GTI Plan",
+
+                    "total_sum_assured":
+                        "Sum Assured (INR)",
+                },
+
+                title="Sum Assured by GTI Plan",
+            )
+
+
+            fig.update_traces(
+
+                textposition="outside",
+
+                hovertemplate=(
+
+                    "<b>%{x}</b>"
+                    "<br>Sum Assured: ₹%{y:,.2f}"
+                    "<extra></extra>"
+                ),
+            )
+
+
+            clean_chart(
+
+                fig,
+
+                height=380,
+
+                y_title="Sum Assured (INR)",
+
+                show_legend=False,
+            )
+
+
+            st.plotly_chart(
+
+                fig,
+
+                use_container_width=True,
+            )
+
+
+        # ---------------------------------------------------------------------
+        # EXPECTED CLAIMS
+        # ---------------------------------------------------------------------
+
+        with right:
+
+
+            gti_claims = gti_plans.copy()
+
+
+            gti_claims[
+                "fresh_expected_claim_cost"
+            ] = numeric_series(
+
+                gti_claims,
+
+                "fresh_expected_claim_cost",
+            )
+
+
+            gti_claims[
+                "Display Claims"
+            ] = gti_claims[
+                "fresh_expected_claim_cost"
+            ].map(
+                format_inr_compact
+            )
+
+
+            fig = px.bar(
+
+                gti_claims,
+
+                x="plan_id",
+
+                y="fresh_expected_claim_cost",
+
+                text="Display Claims",
+
+                labels={
+
+                    "plan_id":
+                        "GTI Plan",
+
+                    "fresh_expected_claim_cost":
+                        "Fresh Expected Claims (INR)",
+                },
+
+                title="Fresh Expected Claims by GTI Plan",
+            )
+
+
+            fig.update_traces(
+
+                textposition="outside",
+
+                hovertemplate=(
+
+                    "<b>%{x}</b>"
+                    "<br>Expected Claims: ₹%{y:,.2f}"
+                    "<extra></extra>"
+                ),
+            )
+
+
+            clean_chart(
+
+                fig,
+
+                height=380,
+
+                y_title="Expected Claims (INR)",
+
+                show_legend=False,
+            )
+
+
+            st.plotly_chart(
+
+                fig,
+
+                use_container_width=True,
+            )
+
+
+        # ---------------------------------------------------------------------
+        # FCL REFERRALS
+        # ---------------------------------------------------------------------
+
+        referrals = gti_plans.copy()
+
+
+        referrals[
+            "underwriting_referrals"
+        ] = numeric_series(
+
+            referrals,
+
+            "underwriting_referrals",
+        )
+
+
+        referrals[
+            "Display Referrals"
+        ] = referrals[
+            "underwriting_referrals"
+        ].map(
+            format_integer
+        )
 
 
         fig = px.bar(
 
-            gti,
-
-            x="plan_id",
-
-            y="total_sum_assured",
-
-            labels={
-
-                "plan_id":
-                    "GTI Plan",
-
-                "total_sum_assured":
-                    "Sum Assured (INR)",
-            },
-
-            title="GTI Sum Assured by Plan",
-        )
-
-
-        st.plotly_chart(
-
-            fig,
-
-            use_container_width=True
-        )
-
-
-        # Expected claims chart.
-        fig = px.bar(
-
-            gti,
-
-            x="plan_id",
-
-            y="fresh_expected_claim_cost",
-
-            labels={
-
-                "plan_id":
-                    "GTI Plan",
-
-                "fresh_expected_claim_cost":
-                    "Fresh Expected Claims (INR)",
-            },
-
-            title="Fresh Expected Claims by GTI Plan",
-        )
-
-
-        st.plotly_chart(
-
-            fig,
-
-            use_container_width=True
-        )
-
-
-        # FCL referrals.
-        fig = px.bar(
-
-            gti,
+            referrals,
 
             x="plan_id",
 
             y="underwriting_referrals",
+
+            text="Display Referrals",
 
             labels={
 
@@ -1294,25 +3248,152 @@ elif page == "Group Risk — GTI & EDLI":
         )
 
 
+        fig.update_traces(
+
+            textposition="outside",
+
+            hovertemplate=(
+
+                "<b>%{x}</b>"
+                "<br>Referrals: %{y:,.0f}"
+                "<extra></extra>"
+            ),
+        )
+
+
+        clean_chart(
+
+            fig,
+
+            height=360,
+
+            y_title="Employees",
+
+            show_legend=False,
+        )
+
+
         st.plotly_chart(
 
             fig,
 
-            use_container_width=True
+            use_container_width=True,
         )
 
 
-    # Explain premium basis.
+        # ---------------------------------------------------------------------
+        # GTI PLAN SUMMARY
+        # ---------------------------------------------------------------------
+
+        st.subheader(
+            "GTI Plan Summary"
+        )
+
+
+        gti_summary = gti_plans.copy()
+
+
+        if "gti_fcl_referral_rate" not in gti_summary.columns:
+
+
+            members = numeric_series(
+
+                gti_summary,
+
+                "active_members",
+            ).replace(
+                0,
+                np.nan,
+            )
+
+
+            refs = numeric_series(
+
+                gti_summary,
+
+                "underwriting_referrals",
+            )
+
+
+            gti_summary[
+                "gti_fcl_referral_rate"
+            ] = (
+
+                refs
+                /
+                members
+            )
+
+
+        gti_columns = [
+
+            "plan_id",
+
+            "active_members",
+
+            "total_sum_assured",
+
+            "fresh_expected_claim_cost",
+
+            "fresh_model_gross_premium",
+
+            "underwriting_referrals",
+
+            "gti_fcl_referral_rate",
+        ]
+
+
+        gti_table = pretty_table(
+
+            gti_summary,
+
+            gti_columns,
+
+            money={
+
+                "total_sum_assured",
+
+                "fresh_expected_claim_cost",
+
+                "fresh_model_gross_premium",
+            },
+
+            integers={
+
+                "active_members",
+
+                "underwriting_referrals",
+            },
+
+            pct_ratio={
+
+                "gti_fcl_referral_rate",
+            },
+        )
+
+
+        st.dataframe(
+
+            gti_table,
+
+            use_container_width=True,
+
+            hide_index=True,
+        )
+
+
     st.success(
-        "Final GTI dashboard premium uses the fresh expected-claims "
-        "pricing basis. Historical A/E credibility-adjusted pricing "
-        "is intentionally excluded from the final KPI."
+        "Final GTI dashboard premium uses the fresh expected-claims pricing basis. "
+        "Historical A/E credibility-adjusted pricing is intentionally excluded "
+        "from the final KPI."
     )
 
 
-    # -------------------------------------------------------------------------
-    # EDLI SECTION
-    # -------------------------------------------------------------------------
+    # =========================================================================
+    # EDLI
+    # =========================================================================
+
+    st.divider()
 
 
     st.subheader(
@@ -1320,48 +3401,22 @@ elif page == "Group Risk — GTI & EDLI":
     )
 
 
-    # Keep EDLI plan.
-    edli = plans.loc[
+    edli_lower = safe_sum(
 
-        plans[
-            "product_type"
-        ].eq(
-            "EDLI"
-        )
+        edli_plans,
 
-    ].copy()
+        "edli_part_b_lower_if_qualifying",
+    )
 
 
-    # Aggregate EDLI indicative ranges.
-    edli_lower = pd.to_numeric(
+    edli_upper = safe_sum(
 
-        edli.get(
+        edli_plans,
 
-            "edli_part_b_lower_if_qualifying",
-
-            pd.Series(dtype=float),
-        ),
-
-        errors="coerce"
-
-    ).sum()
+        "edli_part_b_upper_if_qualifying",
+    )
 
 
-    edli_upper = pd.to_numeric(
-
-        edli.get(
-
-            "edli_part_b_upper_if_qualifying",
-
-            pd.Series(dtype=float),
-        ),
-
-        errors="coerce"
-
-    ).sum()
-
-
-    # Display range.
     cols = st.columns(
         3
     )
@@ -1371,7 +3426,7 @@ elif page == "Group Risk — GTI & EDLI":
 
         show_metric(
             "EDLI Members",
-            8501,
+            edli_members,
             "integer",
         )
 
@@ -1394,31 +3449,37 @@ elif page == "Group Risk — GTI & EDLI":
         )
 
 
-    # EDLI governance warning.
     st.warning(
         "EDLI is an effective-date-sensitive statutory benefit. "
-        "The displayed Part B range is analytical and must not be "
-        "treated as the final official settlement amount. "
+        "The displayed Part B range is analytical and must not be treated "
+        "as the final official settlement amount. "
         "Official calculator verification remains required."
     )
 
 
 # =============================================================================
-# PAGE 5 - WORKFORCE CONCENTRATION
+# PAGE 5
+# WORKFORCE CONCENTRATION
 # =============================================================================
-
 
 elif page == "Workforce Concentration":
 
 
-    # Page heading.
     st.header(
         "Workforce Benefit & Risk Concentration"
     )
 
 
-    # Confirm segment data exist.
-    if segments.empty:
+    if (
+
+        segments.empty
+
+        or "segment_type"
+        not in segments.columns
+
+        or "segment_value"
+        not in segments.columns
+    ):
 
 
         st.warning(
@@ -1429,7 +3490,6 @@ elif page == "Workforce Concentration":
     else:
 
 
-        # Available segmentation types.
         segment_types = sorted(
 
             segments[
@@ -1438,391 +3498,1205 @@ elif page == "Workforce Concentration":
 
             .dropna()
 
+            .astype(
+                str
+            )
+
             .unique()
+
+            .tolist()
         )
 
 
-        # Select segmentation dimension.
         selected_segment = st.selectbox(
 
             "Segment By",
 
             segment_types,
-        )
 
+            format_func=(
 
-        # Available risk measures.
-        risk_options = {
+                lambda x:
 
-            "Defined Benefit Liability":
-                "combined_db_liability",
-
-            "DC Future-Contribution Corpus":
-                "projected_future_contribution_corpus",
-
-            "GTI Sum Assured":
-                "gti_sum_assured",
-
-            "GTI Expected Claims":
-                "gti_fresh_expected_claim_cost",
-
-            "GTI Fresh Gross Premium":
-                "gti_fresh_model_gross_premium",
-        }
-
-
-        # Let user select metric.
-        selected_label = st.selectbox(
-
-            "Risk Measure",
-
-            list(
-                risk_options.keys()
+                    x
+                    .replace(
+                        "_",
+                        " ",
+                    )
+                    .title()
             ),
         )
 
 
-        # Resolve field.
-        selected_metric = risk_options[
-            selected_label
+        # ---------------------------------------------------------------------
+        # AVAILABLE RISK MEASURES
+        # ---------------------------------------------------------------------
+
+        candidate_risks = [
+
+            (
+                "Defined Benefit Liability",
+                "combined_db_liability",
+            ),
+
+            (
+                "DC Future-Contribution Corpus",
+                "projected_future_contribution_corpus",
+            ),
+
+            (
+                "GTI Sum Assured",
+                "gti_sum_assured",
+            ),
+
+            (
+                "GTI Fresh Expected Claims",
+                "gti_fresh_expected_claim_cost",
+            ),
+
+            (
+                "GTI Fresh Gross Premium",
+                "gti_fresh_model_gross_premium",
+            ),
+
+            (
+                "EDLI Part B Lower",
+                "edli_part_b_lower_if_qualifying",
+            ),
+
+            (
+                "EDLI Part B Upper",
+                "edli_part_b_upper_if_qualifying",
+            ),
         ]
 
 
-        # Filter selected segment type.
-        segment_view = segments.loc[
+        risk_options = {}
 
-            segments[
-                "segment_type"
-            ].eq(
-                selected_segment
+
+        for (
+            label,
+            column,
+        ) in candidate_risks:
+
+
+            if (
+
+                column in segments.columns
+
+                and numeric_series(
+                    segments,
+                    column,
+                )
+                .notna()
+                .any()
+            ):
+
+
+                risk_options[
+                    label
+                ] = column
+
+
+        if not risk_options:
+
+
+            st.warning(
+                "No supported risk measures are available in the segment data."
             )
 
-        ].copy()
+
+        else:
 
 
-        # Sort largest first.
-        segment_view = segment_view.sort_values(
+            selected_label = st.selectbox(
 
-            selected_metric,
+                "Risk Measure",
 
-            ascending=False
-        )
+                list(
+                    risk_options.keys()
+                ),
+            )
 
 
-        # Draw concentration chart.
-        fig = px.bar(
+            selected_metric = risk_options[
+                selected_label
+            ]
 
-            segment_view,
 
-            x="segment_value",
+            segment_view = segments.loc[
 
-            y=selected_metric,
+                segments[
+                    "segment_type"
+                ]
 
-            labels={
+                .astype(
+                    str
+                )
+
+                .eq(
+                    selected_segment
+                )
+
+            ].copy()
+
+
+            segment_view[
+                selected_metric
+            ] = numeric_series(
+
+                segment_view,
+
+                selected_metric,
+            )
+
+
+            segment_view = segment_view.sort_values(
+
+                selected_metric,
+
+                ascending=False,
+            )
+
+
+            total_selected = (
+
+                segment_view[
+                    selected_metric
+                ]
+
+                .fillna(
+                    0
+                )
+
+                .sum()
+            )
+
+
+            if total_selected > 0:
+
+
+                segment_view[
+                    "portfolio_share_pct"
+                ] = (
+
+                    segment_view[
+                        selected_metric
+                    ]
+
+                    .fillna(
+                        0
+                    )
+
+                    /
+
+                    total_selected
+
+                    * 100
+                )
+
+
+            else:
+
+
+                segment_view[
+                    "portfolio_share_pct"
+                ] = 0.0
+
+
+            segment_display_name = (
+
+                selected_segment
+
+                .replace(
+                    "_",
+                    " ",
+                )
+
+                .title()
+            )
+
+
+            # -----------------------------------------------------------------
+            # SEGMENT CHART
+            # -----------------------------------------------------------------
+
+            st.subheader(
+
+                f"{selected_label} "
+                f"by {segment_display_name}"
+            )
+
+
+            chart_df = segment_view.copy()
+
+
+            chart_df[
+                "Display Value"
+            ] = chart_df[
+                selected_metric
+            ].map(
+                format_inr_compact
+            )
+
+
+            fig = px.bar(
+
+                chart_df,
+
+                x="segment_value",
+
+                y=selected_metric,
+
+                text="Display Value",
+
+                labels={
+
+                    "segment_value":
+                        segment_display_name,
+
+                    selected_metric:
+                        f"{selected_label} (INR)",
+                },
+            )
+
+
+            fig.update_traces(
+
+                textposition="outside",
+
+                hovertemplate=(
+
+                    "<b>%{x}</b>"
+                    "<br>Value: ₹%{y:,.2f}"
+                    "<extra></extra>"
+                ),
+            )
+
+
+            clean_chart(
+
+                fig,
+
+                height=430,
+
+                y_title=f"{selected_label} (INR)",
+
+                show_legend=False,
+            )
+
+
+            st.plotly_chart(
+
+                fig,
+
+                use_container_width=True,
+            )
+
+
+            # -----------------------------------------------------------------
+            # DYNAMIC BUSINESS TABLE
+            # -----------------------------------------------------------------
+
+            common_columns = [
+
+                "segment_value",
+
+                "employee_count",
+            ]
+
+
+            custom_labels = {
 
                 "segment_value":
-                    selected_segment.title(),
-
-                selected_metric:
-                    selected_label,
-            },
-
-            title=(
-                f"{selected_label} by "
-                f"{selected_segment.title()}"
-            ),
-        )
+                    segment_display_name,
+            }
 
 
-        # Display chart.
-        st.plotly_chart(
-
-            fig,
-
-            use_container_width=True
-        )
+            if selected_metric == "combined_db_liability":
 
 
-        # Display concentration table.
-        st.dataframe(
+                table_columns = (
 
-            segment_view,
+                    common_columns
 
-            use_container_width=True,
+                    + [
 
-            hide_index=True,
-        )
+                        "gratuity_dbo",
+
+                        "db_pension_liability",
+
+                        "combined_db_liability",
+
+                        "portfolio_share_pct",
+                    ]
+                )
+
+
+                money_columns = {
+
+                    "gratuity_dbo",
+
+                    "db_pension_liability",
+
+                    "combined_db_liability",
+                }
+
+
+            elif selected_metric == "projected_future_contribution_corpus":
+
+
+                table_columns = (
+
+                    common_columns
+
+                    + [
+
+                        "current_annual_employer_contribution",
+
+                        "current_annual_employee_contribution",
+
+                        "projected_future_contribution_corpus",
+
+                        "portfolio_share_pct",
+                    ]
+                )
+
+
+                money_columns = {
+
+                    "current_annual_employer_contribution",
+
+                    "current_annual_employee_contribution",
+
+                    "projected_future_contribution_corpus",
+                }
+
+
+            elif selected_metric in {
+
+                "gti_sum_assured",
+
+                "gti_fresh_expected_claim_cost",
+
+                "gti_fresh_model_gross_premium",
+
+            }:
+
+
+                table_columns = (
+
+                    common_columns
+
+                    + [
+
+                        "gti_sum_assured",
+
+                        "gti_fresh_expected_claim_cost",
+
+                        "gti_fresh_model_gross_premium",
+
+                        "gti_cover_above_free_cover_limit",
+
+                        "portfolio_share_pct",
+                    ]
+                )
+
+
+                money_columns = {
+
+                    "gti_sum_assured",
+
+                    "gti_fresh_expected_claim_cost",
+
+                    "gti_fresh_model_gross_premium",
+
+                    "gti_cover_above_free_cover_limit",
+                }
+
+
+            else:
+
+
+                table_columns = (
+
+                    common_columns
+
+                    + [
+
+                        "edli_part_b_lower_if_qualifying",
+
+                        "edli_part_b_upper_if_qualifying",
+
+                        "portfolio_share_pct",
+                    ]
+                )
+
+
+                money_columns = {
+
+                    "edli_part_b_lower_if_qualifying",
+
+                    "edli_part_b_upper_if_qualifying",
+                }
+
+
+            segment_table = pretty_table(
+
+                segment_view,
+
+                table_columns,
+
+                labels=custom_labels,
+
+                money=money_columns,
+
+                integers={
+
+                    "employee_count",
+                },
+
+                pct_values={
+
+                    "portfolio_share_pct",
+                },
+            )
+
+
+            st.dataframe(
+
+                segment_table,
+
+                use_container_width=True,
+
+                hide_index=True,
+            )
 
 
 # =============================================================================
-# PAGE 6 - EMPLOYEE DRILL-DOWN
+# PAGE 6
+# EMPLOYEE DRILL-DOWN
 # =============================================================================
-
 
 elif page == "Employee Drill-Down":
 
 
-    # Page heading.
     st.header(
         "Employee Benefit Drill-Down"
     )
 
 
-    # Start with complete employee table.
-    filtered_employees = employees.copy()
+    if employees.empty:
 
 
-    # -------------------------------------------------------------------------
-    # DEPARTMENT FILTER
-    # -------------------------------------------------------------------------
+        st.warning(
+            "Employee drill-down data are unavailable."
+        )
 
 
-    if "department" in employees.columns:
+    else:
 
 
-        departments = sorted(
+        filtered_employees = employees.copy()
 
-            employees[
-                "department"
+
+        # ---------------------------------------------------------------------
+        # EMPLOYEE ID SEARCH + STATUS
+        # ---------------------------------------------------------------------
+
+        search_col, status_col = st.columns(
+
+            [
+                2,
+                1,
             ]
+        )
 
-            .dropna()
 
-            .astype(
-                str
+        with search_col:
+
+
+            employee_search = st.text_input(
+
+                "Employee ID Search",
+
+                placeholder=(
+                    "Enter full or partial employee ID"
+                ),
             )
 
-            .unique()
-        )
+
+        with status_col:
 
 
-        selected_departments = st.multiselect(
-
-            "Department",
-
-            departments,
-        )
+            if "employment_status" in employees.columns:
 
 
-        # Apply selection.
-        if selected_departments:
+                status_values = sorted(
+
+                    employees[
+                        "employment_status"
+                    ]
+
+                    .dropna()
+
+                    .astype(
+                        str
+                    )
+
+                    .unique()
+
+                    .tolist()
+                )
+
+
+                selected_status = st.multiselect(
+
+                    "Employment Status",
+
+                    status_values,
+                )
+
+
+            else:
+
+
+                selected_status = []
+
+
+        if (
+
+            employee_search
+
+            and "employee_id"
+            in filtered_employees.columns
+        ):
 
 
             filtered_employees = filtered_employees.loc[
 
                 filtered_employees[
-                    "department"
-                ].astype(
+                    "employee_id"
+                ]
+
+                .astype(
                     str
-                ).isin(
-                    selected_departments
                 )
+
+                .str.contains(
+
+                    employee_search.strip(),
+
+                    case=False,
+
+                    na=False,
+                )
+
             ]
 
 
-    # -------------------------------------------------------------------------
-    # LOCATION FILTER
-    # -------------------------------------------------------------------------
+        if (
 
+            selected_status
 
-    if "location" in employees.columns:
-
-
-        locations = sorted(
-
-            employees[
-                "location"
-            ]
-
-            .dropna()
-
-            .astype(
-                str
-            )
-
-            .unique()
-        )
-
-
-        selected_locations = st.multiselect(
-
-            "Location",
-
-            locations,
-        )
-
-
-        # Apply selection.
-        if selected_locations:
+            and "employment_status"
+            in filtered_employees.columns
+        ):
 
 
             filtered_employees = filtered_employees.loc[
 
                 filtered_employees[
-                    "location"
-                ].astype(
+                    "employment_status"
+                ]
+
+                .astype(
                     str
-                ).isin(
-                    selected_locations
                 )
+
+                .isin(
+                    selected_status
+                )
+
             ]
 
 
-    # -------------------------------------------------------------------------
-    # GRADE FILTER
-    # -------------------------------------------------------------------------
+        # ---------------------------------------------------------------------
+        # DYNAMIC FILTER CONTROLS
+        # ---------------------------------------------------------------------
+
+        available_filters = []
 
 
-    if "grade" in employees.columns:
+        if "department" in employees.columns:
 
+            available_filters.append(
 
-        grades = sorted(
-
-            employees[
-                "grade"
-            ]
-
-            .dropna()
-
-            .astype(
-                str
+                (
+                    "department",
+                    "Department",
+                )
             )
 
-            .unique()
-        )
 
+        if "location" in employees.columns:
 
-        selected_grades = st.multiselect(
+            available_filters.append(
 
-            "Grade",
-
-            grades,
-        )
-
-
-        # Apply selection.
-        if selected_grades:
-
-
-            filtered_employees = filtered_employees.loc[
-
-                filtered_employees[
-                    "grade"
-                ].astype(
-                    str
-                ).isin(
-                    selected_grades
+                (
+                    "location",
+                    "Location",
                 )
+            )
+
+
+        if "grade" in employees.columns:
+
+            available_filters.append(
+
+                (
+                    "grade",
+                    "Grade",
+                )
+            )
+
+
+        selected_filter_values = {}
+
+
+        if available_filters:
+
+
+            filter_columns = st.columns(
+
+                len(
+                    available_filters
+                )
+            )
+
+
+            for (
+                ui_column,
+                filter_definition,
+            ) in zip(
+
+                filter_columns,
+                available_filters,
+            ):
+
+
+                field_name = filter_definition[
+                    0
+                ]
+
+
+                field_label = filter_definition[
+                    1
+                ]
+
+
+                values = sorted(
+
+                    employees[
+                        field_name
+                    ]
+
+                    .dropna()
+
+                    .astype(
+                        str
+                    )
+
+                    .unique()
+
+                    .tolist()
+                )
+
+
+                with ui_column:
+
+
+                    selected_filter_values[
+                        field_name
+                    ] = st.multiselect(
+
+                        field_label,
+
+                        values,
+                    )
+
+
+        for (
+            field_name,
+            selected_values,
+        ) in selected_filter_values.items():
+
+
+            if selected_values:
+
+
+                filtered_employees = filtered_employees.loc[
+
+                    filtered_employees[
+                        field_name
+                    ]
+
+                    .astype(
+                        str
+                    )
+
+                    .isin(
+                        selected_values
+                    )
+
+                ]
+
+
+        # ---------------------------------------------------------------------
+        # SELECTION SUMMARY
+        # ---------------------------------------------------------------------
+
+        cols = st.columns(
+            4
+        )
+
+
+        with cols[0]:
+
+            show_metric(
+                "Employees in Selection",
+                len(
+                    filtered_employees
+                ),
+                "integer",
+            )
+
+
+        with cols[1]:
+
+            show_metric(
+                "Combined DB Liability",
+                safe_sum(
+                    filtered_employees,
+                    "combined_db_liability",
+                ),
+                "currency",
+            )
+
+
+        with cols[2]:
+
+            show_metric(
+                "DC Future Corpus",
+                safe_sum(
+                    filtered_employees,
+                    "projected_future_contribution_corpus",
+                ),
+                "currency",
+            )
+
+
+        with cols[3]:
+
+            show_metric(
+                "GTI Sum Assured",
+                safe_sum(
+                    filtered_employees,
+                    "gti_sum_assured",
+                ),
+                "currency",
+            )
+
+
+        # ---------------------------------------------------------------------
+        # CORE VS FULL TABLE
+        # ---------------------------------------------------------------------
+
+        table_view = st.radio(
+
+            "Table View",
+
+            [
+
+                "Core Overview",
+
+                "Full Benefit Detail",
+            ],
+
+            horizontal=True,
+        )
+
+
+        # ---------------------------------------------------------------------
+        # CORE OVERVIEW
+        # ---------------------------------------------------------------------
+
+        if table_view == "Core Overview":
+
+
+            core_columns = [
+
+                "employee_id",
+
+                "employment_status",
+
+                "department",
+
+                "location",
+
+                "grade",
+
+                "attained_age_years",
+
+                "completed_service_years",
+
+                "combined_db_liability",
+
+                "current_annual_employer_contribution",
+
+                "current_annual_employee_contribution",
+
+                "projected_future_contribution_corpus",
+
+                "gti_sum_assured",
             ]
 
 
-    # -------------------------------------------------------------------------
-    # EMPLOYEE COUNT
-    # -------------------------------------------------------------------------
+            employee_table = pretty_table(
+
+                filtered_employees,
+
+                core_columns,
+
+                money={
+
+                    "combined_db_liability",
+
+                    "current_annual_employer_contribution",
+
+                    "current_annual_employee_contribution",
+
+                    "projected_future_contribution_corpus",
+
+                    "gti_sum_assured",
+                },
+
+                decimals={
+
+                    "attained_age_years":
+                        1,
+
+                    "completed_service_years":
+                        1,
+                },
+            )
 
 
-    show_metric(
-        "Employees in Current Selection",
-        len(
-            filtered_employees
-        ),
-        "integer",
-    )
+        # ---------------------------------------------------------------------
+        # FULL BENEFIT DETAIL
+        # ---------------------------------------------------------------------
+
+        else:
 
 
-    # -------------------------------------------------------------------------
-    # EMPLOYEE TABLE
-    # -------------------------------------------------------------------------
+            referral_flag = first_existing_column(
+
+                filtered_employees,
+
+                [
+
+                    "gti_underwriting_referral_flag",
+
+                    "underwriting_referral_flag",
+
+                    "gti_fcl_referral_flag",
+                ],
+            )
 
 
-    st.dataframe(
+            full_columns = [
 
-        filtered_employees,
+                "employee_id",
 
-        use_container_width=True,
+                "employment_status",
 
-        hide_index=True,
+                "department",
 
-        height=600,
-    )
+                "location",
+
+                "grade",
+
+                "attained_age_years",
+
+                "completed_service_years",
+
+                "gratuity_plan_id",
+
+                "db_pension_plan_id",
+
+                "dc_superannuation_plan_id",
+
+                "gti_pricing_plan_id",
+
+                "edli_plan_id",
+
+                "gratuity_dbo",
+
+                "db_pension_liability",
+
+                "combined_db_liability",
+
+                "current_annual_employer_contribution",
+
+                "current_annual_employee_contribution",
+
+                "projected_future_contribution_corpus",
+
+                "gti_sum_assured",
+
+                "gti_fresh_expected_claim_cost",
+
+                "gti_fresh_model_gross_premium",
+
+                "gti_cover_above_free_cover_limit",
+
+                "edli_part_b_lower_if_qualifying",
+
+                "edli_part_b_upper_if_qualifying",
+            ]
 
 
-    # -------------------------------------------------------------------------
-    # DOWNLOAD FILTERED EMPLOYEE DATA
-    # -------------------------------------------------------------------------
+            if referral_flag:
+
+                full_columns.append(
+                    referral_flag
+                )
 
 
-    st.download_button(
+            extra_labels = {}
 
-        label="Download Filtered Employee Data",
 
-        data=filtered_employees.to_csv(
-            index=False
-        ).encode(
-            "utf-8"
-        ),
+            if referral_flag:
 
-        file_name=(
-            "employee_benefit_drilldown.csv"
-        ),
+                extra_labels[
+                    referral_flag
+                ] = "FCL Referral"
 
-        mime="text/csv",
-    )
+
+            employee_table = pretty_table(
+
+                filtered_employees,
+
+                full_columns,
+
+                labels=extra_labels,
+
+                money={
+
+                    "gratuity_dbo",
+
+                    "db_pension_liability",
+
+                    "combined_db_liability",
+
+                    "current_annual_employer_contribution",
+
+                    "current_annual_employee_contribution",
+
+                    "projected_future_contribution_corpus",
+
+                    "gti_sum_assured",
+
+                    "gti_fresh_expected_claim_cost",
+
+                    "gti_fresh_model_gross_premium",
+
+                    "gti_cover_above_free_cover_limit",
+
+                    "edli_part_b_lower_if_qualifying",
+
+                    "edli_part_b_upper_if_qualifying",
+                },
+
+                decimals={
+
+                    "attained_age_years":
+                        1,
+
+                    "completed_service_years":
+                        1,
+                },
+
+                booleans=(
+
+                    {
+                        referral_flag
+                    }
+
+                    if referral_flag
+
+                    else None
+                ),
+            )
+
+
+        # ---------------------------------------------------------------------
+        # EMPLOYEE TABLE
+        # ---------------------------------------------------------------------
+
+        st.dataframe(
+
+            employee_table,
+
+            use_container_width=True,
+
+            hide_index=True,
+
+            height=540,
+        )
+
+
+        # ---------------------------------------------------------------------
+        # DOWNLOAD RAW FILTERED DETAIL
+        # ---------------------------------------------------------------------
+
+        st.download_button(
+
+            label="Download Filtered Employee Data",
+
+            data=(
+
+                filtered_employees
+
+                .to_csv(
+                    index=False
+                )
+
+                .encode(
+                    "utf-8"
+                )
+            ),
+
+            file_name=(
+                "employee_benefit_drilldown.csv"
+            ),
+
+            mime="text/csv",
+        )
 
 
 # =============================================================================
-# PAGE 7 - GOVERNANCE AND VALIDATION
+# PAGE 7
+# GOVERNANCE & VALIDATION
 # =============================================================================
-
 
 elif page == "Governance & Validation":
 
 
-    # Page heading.
     st.header(
         "Model Governance & Validation"
     )
 
 
     # -------------------------------------------------------------------------
-    # VALIDATION STATUS
+    # VALIDATION COUNTS
     # -------------------------------------------------------------------------
 
+    validation_passes = 0
 
-    st.subheader(
-        "Portfolio Validation"
+    validation_failures = 0
+
+
+    if (
+
+        not validation.empty
+
+        and "status"
+        in validation.columns
+    ):
+
+
+        status_upper = (
+
+            validation[
+                "status"
+            ]
+
+            .astype(
+                str
+            )
+
+            .str.upper()
+        )
+
+
+        validation_passes = int(
+
+            status_upper
+
+            .eq(
+                "PASS"
+            )
+
+            .sum()
+        )
+
+
+        validation_failures = int(
+
+            status_upper
+
+            .eq(
+                "FAIL"
+            )
+
+            .sum()
+        )
+
+
+    governance_categories = len(
+        governance
     )
 
 
-    # Count failures.
-    validation_failures = int(
-
-        validation[
-            "status"
-        ].astype(
-            str
-        ).str.upper().eq(
-            "FAIL"
-        ).sum()
-    )
+    review_categories = 0
 
 
-    # Count passed checks.
-    validation_passes = int(
+    if (
 
-        validation[
-            "status"
-        ].astype(
-            str
-        ).str.upper().eq(
-            "PASS"
-        ).sum()
-    )
+        not governance.empty
+
+        and "dashboard_status"
+        in governance.columns
+    ):
 
 
-    # Show validation metrics.
+        review_categories = int(
+
+            governance[
+                "dashboard_status"
+            ]
+
+            .astype(
+                str
+            )
+
+            .str.upper()
+
+            .eq(
+                "REVIEW"
+            )
+
+            .sum()
+        )
+
+
+    # -------------------------------------------------------------------------
+    # SUMMARY KPI CARDS
+    # -------------------------------------------------------------------------
+
     cols = st.columns(
-        2
+        4
     )
 
 
@@ -1844,7 +4718,24 @@ elif page == "Governance & Validation":
         )
 
 
-    # Clear status.
+    with cols[2]:
+
+        show_metric(
+            "Governance Categories",
+            governance_categories,
+            "integer",
+        )
+
+
+    with cols[3]:
+
+        show_metric(
+            "Categories Requiring Review",
+            review_categories,
+            "integer",
+        )
+
+
     if validation_failures == 0:
 
 
@@ -1861,10 +4752,43 @@ elif page == "Governance & Validation":
         )
 
 
-    # Display validation table.
-    st.dataframe(
+    # -------------------------------------------------------------------------
+    # CLEAN VALIDATION TABLE
+    # -------------------------------------------------------------------------
+
+    st.subheader(
+        "Portfolio Validation"
+    )
+
+
+    validation_columns = [
+
+        "check",
+
+        "exceptions",
+
+        "status",
+
+        "note",
+    ]
+
+
+    validation_table = pretty_table(
 
         validation,
+
+        validation_columns,
+
+        integers={
+
+            "exceptions",
+        },
+    )
+
+
+    st.dataframe(
+
+        validation_table,
 
         use_container_width=True,
 
@@ -1873,48 +4797,123 @@ elif page == "Governance & Validation":
 
 
     # -------------------------------------------------------------------------
-    # GOVERNANCE
+    # CLEAN GOVERNANCE TABLE
     # -------------------------------------------------------------------------
-
 
     st.subheader(
         "Governance Register"
     )
 
 
-    # Keep active reviews first.
     governance_view = governance.copy()
 
 
-    # Convert counts.
-    governance_view[
-        "review_rows"
-    ] = pd.to_numeric(
+    if "review_rows" in governance_view.columns:
+
 
         governance_view[
             "review_rows"
+        ] = numeric_series(
+
+            governance_view,
+
+            "review_rows",
+        ).fillna(
+            0
+        )
+
+
+    if "dashboard_status" in governance_view.columns:
+
+
+        governance_view[
+            "_status_order"
+        ] = (
+
+            governance_view[
+                "dashboard_status"
+            ]
+
+            .astype(
+                str
+            )
+
+            .str.upper()
+
+            .map(
+
+                {
+
+                    "REVIEW":
+                        0,
+
+                    "OK":
+                        1,
+                }
+            )
+
+            .fillna(
+                2
+            )
+        )
+
+
+    else:
+
+
+        governance_view[
+            "_status_order"
+        ] = 2
+
+
+    governance_view = governance_view.sort_values(
+
+        [
+
+            "_status_order",
+
+            "review_rows",
         ],
 
-        errors="coerce"
+        ascending=[
 
-    ).fillna(
-        0
+            True,
+
+            False,
+        ],
     )
 
 
-    # Sort largest governance review first.
-    governance_view = governance_view.sort_values(
+    governance_columns = [
+
+        "governance_item",
 
         "review_rows",
 
-        ascending=False
+        "treatment",
+
+        "source_pipeline",
+
+        "dashboard_status",
+    ]
+
+
+    governance_table = pretty_table(
+
+        governance_view,
+
+        governance_columns,
+
+        integers={
+
+            "review_rows",
+        },
     )
 
 
-    # Display.
     st.dataframe(
 
-        governance_view,
+        governance_table,
 
         use_container_width=True,
 
@@ -1922,11 +4921,10 @@ elif page == "Governance & Validation":
     )
 
 
-    # Explain governance distinction.
     st.info(
-        "Governance reviews are documented model limitations, "
-        "fallbacks or business-review items. They are not automatically "
-        "mathematical validation failures."
+        "Governance reviews are documented model limitations, fallbacks "
+        "or business-review items. They are not automatically mathematical "
+        "validation failures."
     )
 
 
@@ -1934,13 +4932,11 @@ elif page == "Governance & Validation":
 # FOOTER
 # =============================================================================
 
-
-# Separate footer from page content.
 st.divider()
 
 
-# Display project identity.
 st.caption(
-    "Hessian-AI • Quantitative Actuarial Employee Benefits Dashboard • "
-    "Valuation Date: 1 September 2026 • Dashboard Data Mart: P11-C01"
+    f"Hessian-AI · Quantitative Actuarial Employee Benefits Dashboard · "
+    f"Valuation Date: {VALUATION_DATE} · "
+    f"Dashboard Data Mart: {DASHBOARD_VERSION}"
 )
