@@ -1,0 +1,74 @@
+dataset,column,value,count,pct
+employee,gender,Male,6566,65.66
+employee,gender,Female,3371,33.71
+employee,gender,Other/Unspecified,63,0.63
+employee,marital_status,Married,4884,48.84
+employee,marital_status,Single,4457,44.57
+employee,marital_status,Widowed/Separated,659,6.59
+employee,employment_status,Active,8960,89.60000000000001
+employee,employment_status,Exited,671,6.710000000000001
+employee,employment_status,Retired,161,1.6099999999999999
+employee,employment_status,Early Retired,103,1.03
+employee,employment_status,Deceased,58,0.58
+employee,employment_status,Disabled,47,0.47000000000000003
+employee,employment_type,Permanent,8357,83.57
+employee,employment_type,Fixed-Term,962,9.62
+employee,employment_type,Contract,681,6.81
+employee,grade,E4,2131,21.310000000000002
+employee,grade,E3,2126,21.26
+employee,grade,E5,1701,17.01
+employee,grade,E2,1477,14.77
+employee,grade,E6,1085,10.85
+employee,grade,E1,822,8.219999999999999
+employee,grade,E7,513,5.13
+employee,grade,E8,145,1.4500000000000002
+employee,department,Manufacturing,2222,22.220000000000002
+employee,department,Operations,1427,14.27
+employee,department,Sales,1281,12.809999999999999
+employee,department,Technology,972,9.719999999999999
+employee,department,Finance,892,8.92
+employee,department,Supply Chain,825,8.25
+employee,department,Research,689,6.890000000000001
+employee,department,Customer Service,662,6.619999999999999
+employee,department,Corporate,526,5.26
+employee,department,Human Resources,504,5.04
+employee,occupation_class,Office,3139,31.39
+employee,occupation_class,Factory,2977,29.770000000000003
+employee,occupation_class,Field,1736,17.36
+employee,occupation_class,Management,1282,12.82
+employee,occupation_class,Laboratory,866,8.66
+employee,work_location,Mumbai,1814,18.14
+employee,work_location,Pune,1566,15.659999999999998
+employee,work_location,Bengaluru,1426,14.26
+employee,work_location,Delhi NCR,1326,13.26
+employee,work_location,Hyderabad,1108,11.08
+employee,work_location,Chennai,1081,10.81
+employee,work_location,Ahmedabad,883,8.83
+employee,work_location,Kolkata,796,7.960000000000001
+employee,work_environment,Office,4421,44.21
+employee,work_environment,Plant,2639,26.39
+employee,work_environment,Field,1522,15.22
+employee,work_environment,Laboratory,769,7.6899999999999995
+employee,work_environment,Hazardous,649,6.49
+employee,salary_currency,INR,10000,100.0
+employee,gratuity_member_flag,Yes,9759,97.59
+employee,gratuity_member_flag,No,241,2.41
+employee,superannuation_member_flag,Yes,6312,63.12
+employee,superannuation_member_flag,No,3688,36.88
+employee,superannuation_scheme_type,DC,4845,48.449999999999996
+employee,superannuation_scheme_type,<MISSING>,3688,36.88
+employee,superannuation_scheme_type,DB,1467,14.67
+employee,pf_member_flag,Yes,9550,95.5
+employee,pf_member_flag,No,450,4.5
+employee,edli_eligible_flag,Yes,8618,86.18
+employee,edli_eligible_flag,No,1382,13.819999999999999
+employee,gti_member_flag,Yes,8879,88.79
+employee,gti_member_flag,No,1121,11.21
+employee,gti_cover_basis,Salary Multiple,4317,43.169999999999995
+employee,gti_cover_basis,Flat,2345,23.45
+employee,gti_cover_basis,Grade Based,2217,22.17
+employee,gti_cover_basis,<MISSING>,1121,11.21
+employee,source_system,HRIS,8204,82.04
+employee,source_system,Legacy_HR,784,7.84
+employee,source_system,Benefits_Admin,697,6.97
+employee,source_system,Manual_Upload,315,3.15

@@ -1,0 +1,143 @@
+﻿rule_id,plan_id,product_type,rule_category,parameter_name,parameter_value,value_type,unit,formula_template,effective_from,effective_to,dashboard_editable_flag,source_reference
+R0001,GRAT_STD_01,Gratuity,Benefit,benefit_days,15,Numeric,days,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0002,GRAT_STD_01,Gratuity,Benefit,divisor_days,26,Numeric,days,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0003,GRAT_STD_01,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0004,GRAT_STD_01,Gratuity,Eligibility,vesting_years_resignation,5,Numeric,years,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0005,GRAT_STD_01,Gratuity,Eligibility,death_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0006,GRAT_STD_01,Gratuity,Eligibility,disability_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0007,GRAT_STD_01,Gratuity,Eligibility,part_year_rounding_threshold_months,6,Numeric,months,qualifying_service_rounding,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0008,GRAT_STD_01,Gratuity,Financial,salary_escalation_rate,0.06,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic valuation assumption; dashboard scenario input
+R0009,GRAT_STD_01,Gratuity,Financial,discount_rate,0.07,Numeric,decimal_rate,present_value_discounting,2026-09-01,,Yes,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+R0010,GRAT_STD_01,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Text,model,gompertz_makeham,2026-09-01,,No,Book Chapter 7; illustrative model family
+R0011,GRAT_STD_01,Gratuity,Demographic,mortality_A,0.0002,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0012,GRAT_STD_01,Gratuity,Demographic,mortality_B,1e-05,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0013,GRAT_STD_01,Gratuity,Demographic,mortality_c,1.1,Numeric,multiplier,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0014,GRAT_STD_01,Gratuity,Demographic,withdrawal_model,Weibull,Text,model,weibull_withdrawal,2026-09-01,,No,Book Chapter 8; illustrative model family
+R0015,GRAT_STD_01,Gratuity,Demographic,weibull_eta,15.0,Numeric,years,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0016,GRAT_STD_01,Gratuity,Demographic,weibull_k,0.75,Numeric,shape,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0017,GRAT_STD_01,Gratuity,Demographic,disability_annual_q,0.0015,Numeric,probability,bernoulli_disability,2026-09-01,,Yes,Synthetic model parameter
+R0018,GRAT_STD_01,Gratuity,Demographic,early_retirement_model,Logistic,Text,model,logistic_early_retirement,2026-09-01,,No,Book Chapter 10; illustrative model family
+R0019,GRAT_ENH_02,Gratuity,Benefit,benefit_days,20,Numeric,days,gratuity_days_over_divisor,2026-09-01,,Yes,Synthetic enhanced employer scheme; statutory minimum remains floor
+R0020,GRAT_ENH_02,Gratuity,Benefit,divisor_days,26,Numeric,days,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0021,GRAT_ENH_02,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0022,GRAT_ENH_02,Gratuity,Eligibility,vesting_years_resignation,5,Numeric,years,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0023,GRAT_ENH_02,Gratuity,Eligibility,death_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0024,GRAT_ENH_02,Gratuity,Eligibility,disability_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0025,GRAT_ENH_02,Gratuity,Eligibility,part_year_rounding_threshold_months,6,Numeric,months,qualifying_service_rounding,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0026,GRAT_ENH_02,Gratuity,Financial,salary_escalation_rate,0.062,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic valuation assumption; dashboard scenario input
+R0027,GRAT_ENH_02,Gratuity,Financial,discount_rate,0.07,Numeric,decimal_rate,present_value_discounting,2026-09-01,,Yes,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+R0028,GRAT_ENH_02,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Text,model,gompertz_makeham,2026-09-01,,No,Book Chapter 7; illustrative model family
+R0029,GRAT_ENH_02,Gratuity,Demographic,mortality_A,0.0002,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0030,GRAT_ENH_02,Gratuity,Demographic,mortality_B,1e-05,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0031,GRAT_ENH_02,Gratuity,Demographic,mortality_c,1.1,Numeric,multiplier,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0032,GRAT_ENH_02,Gratuity,Demographic,withdrawal_model,Weibull,Text,model,weibull_withdrawal,2026-09-01,,No,Book Chapter 8; illustrative model family
+R0033,GRAT_ENH_02,Gratuity,Demographic,weibull_eta,15.0,Numeric,years,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0034,GRAT_ENH_02,Gratuity,Demographic,weibull_k,0.75,Numeric,shape,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0035,GRAT_ENH_02,Gratuity,Demographic,disability_annual_q,0.0015,Numeric,probability,bernoulli_disability,2026-09-01,,Yes,Synthetic model parameter
+R0036,GRAT_ENH_02,Gratuity,Demographic,early_retirement_model,Logistic,Text,model,logistic_early_retirement,2026-09-01,,No,Book Chapter 10; illustrative model family
+R0037,GRAT_EXEC_03,Gratuity,Benefit,benefit_days,20,Numeric,days,gratuity_days_over_divisor,2026-09-01,,Yes,Synthetic enhanced employer scheme; statutory minimum remains floor
+R0038,GRAT_EXEC_03,Gratuity,Benefit,divisor_days,26,Numeric,days,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0039,GRAT_EXEC_03,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0040,GRAT_EXEC_03,Gratuity,Eligibility,vesting_years_resignation,5,Numeric,years,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0041,GRAT_EXEC_03,Gratuity,Eligibility,death_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0042,GRAT_EXEC_03,Gratuity,Eligibility,disability_vesting_waiver,True,Boolean,flag,gratuity_eligibility,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0043,GRAT_EXEC_03,Gratuity,Eligibility,part_year_rounding_threshold_months,6,Numeric,months,qualifying_service_rounding,2026-09-01,,No,https://www.indiacode.nic.in/handle/123456789/22074
+R0044,GRAT_EXEC_03,Gratuity,Financial,salary_escalation_rate,0.065,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic valuation assumption; dashboard scenario input
+R0045,GRAT_EXEC_03,Gratuity,Financial,discount_rate,0.068,Numeric,decimal_rate,present_value_discounting,2026-09-01,,Yes,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+R0046,GRAT_EXEC_03,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Text,model,gompertz_makeham,2026-09-01,,No,Book Chapter 7; illustrative model family
+R0047,GRAT_EXEC_03,Gratuity,Demographic,mortality_A,0.0002,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0048,GRAT_EXEC_03,Gratuity,Demographic,mortality_B,1e-05,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0049,GRAT_EXEC_03,Gratuity,Demographic,mortality_c,1.1,Numeric,multiplier,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0050,GRAT_EXEC_03,Gratuity,Demographic,withdrawal_model,Weibull,Text,model,weibull_withdrawal,2026-09-01,,No,Book Chapter 8; illustrative model family
+R0051,GRAT_EXEC_03,Gratuity,Demographic,weibull_eta,15.0,Numeric,years,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0052,GRAT_EXEC_03,Gratuity,Demographic,weibull_k,0.75,Numeric,shape,weibull_withdrawal,2026-09-01,,Yes,Synthetic model parameter
+R0053,GRAT_EXEC_03,Gratuity,Demographic,disability_annual_q,0.0015,Numeric,probability,bernoulli_disability,2026-09-01,,Yes,Synthetic model parameter
+R0054,GRAT_EXEC_03,Gratuity,Demographic,early_retirement_model,Logistic,Text,model,logistic_early_retirement,2026-09-01,,No,Book Chapter 10; illustrative model family
+R0055,SUP_DC_01,DC_Superannuation,Contribution,contribution_basis,basic_salary_monthly,Text,column,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0056,SUP_DC_01,DC_Superannuation,Contribution,employer_contribution_rate,0.15,Numeric,decimal_rate,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0057,SUP_DC_01,DC_Superannuation,Contribution,employee_contribution_rate,0.0,Numeric,decimal_rate,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0058,SUP_DC_01,DC_Superannuation,Contribution,contribution_frequency,Monthly,Text,frequency,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0059,SUP_DC_01,DC_Superannuation,Financial,expected_investment_return,0.065,Numeric,decimal_rate,dc_accumulation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0060,SUP_DC_01,DC_Superannuation,Financial,annual_charges_rate,0.004,Numeric,decimal_rate,dc_accumulation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0061,SUP_DC_01,DC_Superannuation,Eligibility,retirement_age,60,Numeric,years,dc_retirement,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0062,SUP_DC_02,DC_Superannuation,Contribution,contribution_basis,pensionable_salary_annual,Text,column,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0063,SUP_DC_02,DC_Superannuation,Contribution,employer_contribution_rate,0.1,Numeric,decimal_rate,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0064,SUP_DC_02,DC_Superannuation,Contribution,employee_contribution_rate,0.05,Numeric,decimal_rate,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0065,SUP_DC_02,DC_Superannuation,Contribution,contribution_frequency,Monthly,Text,frequency,dc_contribution,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0066,SUP_DC_02,DC_Superannuation,Financial,expected_investment_return,0.067,Numeric,decimal_rate,dc_accumulation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0067,SUP_DC_02,DC_Superannuation,Financial,annual_charges_rate,0.004,Numeric,decimal_rate,dc_accumulation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0068,SUP_DC_02,DC_Superannuation,Eligibility,retirement_age,60,Numeric,years,dc_retirement,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0069,PEN_DB_01,DB_Pension,Benefit,accrual_rate,0.015,Numeric,decimal_rate,db_pension_accrual,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0070,PEN_DB_01,DB_Pension,Benefit,pensionable_salary_basis,pensionable_salary_annual,Text,column,db_pension_accrual,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0071,PEN_DB_01,DB_Pension,Benefit,spouse_pension_percentage,0.5,Numeric,decimal_rate,spouse_pension,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0072,PEN_DB_01,DB_Pension,Eligibility,retirement_age,60,Numeric,years,db_pension_retirement,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0073,PEN_DB_01,DB_Pension,Financial,salary_escalation_rate,0.06,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0074,PEN_DB_01,DB_Pension,Financial,discount_rate,0.07,Numeric,decimal_rate,present_value_discounting,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0075,PEN_DB_01,DB_Pension,Financial,pension_escalation_rate,0.03,Numeric,decimal_rate,pension_escalation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0076,PEN_DB_01,DB_Pension,Demographic,pensioner_mortality_model,Gompertz-Makeham,Text,model,pensioner_survival,2026-09-01,,No,Book Chapters 7 and 22; illustrative model family
+R0077,PEN_DB_01,DB_Pension,Demographic,mortality_A,0.0002,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0078,PEN_DB_01,DB_Pension,Demographic,mortality_B,1e-05,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0079,PEN_DB_01,DB_Pension,Demographic,mortality_c,1.1,Numeric,multiplier,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0080,PEN_DB_02,DB_Pension,Benefit,accrual_rate,0.02,Numeric,decimal_rate,db_pension_accrual,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0081,PEN_DB_02,DB_Pension,Benefit,pensionable_salary_basis,pensionable_salary_annual,Text,column,db_pension_accrual,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0082,PEN_DB_02,DB_Pension,Benefit,spouse_pension_percentage,0.67,Numeric,decimal_rate,spouse_pension,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0083,PEN_DB_02,DB_Pension,Eligibility,retirement_age,60,Numeric,years,db_pension_retirement,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0084,PEN_DB_02,DB_Pension,Financial,salary_escalation_rate,0.065,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0085,PEN_DB_02,DB_Pension,Financial,discount_rate,0.068,Numeric,decimal_rate,present_value_discounting,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0086,PEN_DB_02,DB_Pension,Financial,pension_escalation_rate,0.03,Numeric,decimal_rate,pension_escalation,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0087,PEN_DB_02,DB_Pension,Demographic,pensioner_mortality_model,Gompertz-Makeham,Text,model,pensioner_survival,2026-09-01,,No,Book Chapters 7 and 22; illustrative model family
+R0088,PEN_DB_02,DB_Pension,Demographic,mortality_A,0.0002,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0089,PEN_DB_02,DB_Pension,Demographic,mortality_B,1e-05,Numeric,intensity,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0090,PEN_DB_02,DB_Pension,Demographic,mortality_c,1.1,Numeric,multiplier,gompertz_makeham,2026-09-01,,Yes,Synthetic model parameter
+R0091,GTI_FLAT_01,GTI,Benefit,cover_basis,Flat,Text,basis,gti_flat_cover,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0092,GTI_FLAT_01,GTI,Benefit,flat_sum_assured,2000000,Numeric,INR,gti_flat_cover,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0093,GTI_FLAT_01,GTI,Pricing,gross_premium_loading_rate,0.2,Numeric,decimal_rate,gti_gross_premium,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0094,GTI_FLAT_01,GTI,Underwriting,free_cover_limit,5000000,Numeric,INR,gti_underwriting,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0095,GTI_SAL_02,GTI,Benefit,cover_basis,Salary Multiple,Text,basis,gti_salary_multiple,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0096,GTI_SAL_02,GTI,Benefit,salary_basis,gross_compensation_annual,Text,column,gti_salary_multiple,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0097,GTI_SAL_02,GTI,Benefit,salary_multiple,3.0,Numeric,multiple,gti_salary_multiple,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0098,GTI_SAL_02,GTI,Benefit,minimum_cover,1500000,Numeric,INR,gti_salary_multiple,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0099,GTI_SAL_02,GTI,Benefit,maximum_cover,10000000,Numeric,INR,gti_salary_multiple,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0100,GTI_SAL_02,GTI,Pricing,gross_premium_loading_rate,0.2,Numeric,decimal_rate,gti_gross_premium,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0101,GTI_SAL_02,GTI,Underwriting,free_cover_limit,7500000,Numeric,INR,gti_underwriting,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0102,GTI_GRADE_03,GTI,Benefit,cover_basis,Grade Based,Text,basis,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0103,GTI_GRADE_03,GTI,Benefit,E1_cover,1500000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0104,GTI_GRADE_03,GTI,Benefit,E2_cover,2000000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0105,GTI_GRADE_03,GTI,Benefit,E3_cover,2500000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0106,GTI_GRADE_03,GTI,Benefit,E4_cover,3000000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0107,GTI_GRADE_03,GTI,Benefit,E5_cover,4000000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0108,GTI_GRADE_03,GTI,Benefit,E6_cover,5000000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0109,GTI_GRADE_03,GTI,Benefit,E7_cover,7500000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0110,GTI_GRADE_03,GTI,Benefit,E8_cover,10000000,Numeric,INR,gti_grade_based,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0111,GTI_GRADE_03,GTI,Pricing,gross_premium_loading_rate,0.2,Numeric,decimal_rate,gti_gross_premium,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0112,GTI_GRADE_03,GTI,Underwriting,free_cover_limit,5000000,Numeric,INR,gti_underwriting,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0113,GTI_FLAT_01,GTI,Demographic,mortality_model,Gompertz-Makeham,Text,model,gti_expected_claims,2026-09-01,,No,Book Chapters 7 and 25; illustrative model family
+R0114,GTI_FLAT_01,GTI,Demographic,mortality_A,0.0002,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0115,GTI_FLAT_01,GTI,Demographic,mortality_B,1e-05,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0116,GTI_FLAT_01,GTI,Demographic,mortality_c,1.1,Numeric,multiplier,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0117,GTI_FLAT_01,GTI,Credibility,credibility_confidence_z,1.96,Numeric,z_score,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0118,GTI_FLAT_01,GTI,Credibility,credibility_tolerance_k,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0119,GTI_SAL_02,GTI,Demographic,mortality_model,Gompertz-Makeham,Text,model,gti_expected_claims,2026-09-01,,No,Book Chapters 7 and 25; illustrative model family
+R0120,GTI_SAL_02,GTI,Demographic,mortality_A,0.0002,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0121,GTI_SAL_02,GTI,Demographic,mortality_B,1e-05,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0122,GTI_SAL_02,GTI,Demographic,mortality_c,1.1,Numeric,multiplier,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0123,GTI_SAL_02,GTI,Credibility,credibility_confidence_z,1.96,Numeric,z_score,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0124,GTI_SAL_02,GTI,Credibility,credibility_tolerance_k,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0125,GTI_GRADE_03,GTI,Demographic,mortality_model,Gompertz-Makeham,Text,model,gti_expected_claims,2026-09-01,,No,Book Chapters 7 and 25; illustrative model family
+R0126,GTI_GRADE_03,GTI,Demographic,mortality_A,0.0002,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0127,GTI_GRADE_03,GTI,Demographic,mortality_B,1e-05,Numeric,intensity,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0128,GTI_GRADE_03,GTI,Demographic,mortality_c,1.1,Numeric,multiplier,gti_expected_claims,2026-09-01,,Yes,Synthetic model parameter
+R0129,GTI_GRADE_03,GTI,Credibility,credibility_confidence_z,1.96,Numeric,z_score,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0130,GTI_GRADE_03,GTI,Credibility,credibility_tolerance_k,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,2026-09-01,,Yes,Book Chapter 25; illustrative credibility parameter
+R0131,EDLI_STAT_CURRENT,EDLI,Statutory,rule_basis,Effective-date statutory rule,Text,basis,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0132,EDLI_STAT_CURRENT,EDLI,Statutory,wage_factor,35,Numeric,multiple,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0133,EDLI_STAT_CURRENT,EDLI,Statutory,wage_ceiling_monthly,15000,Numeric,INR_per_month,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0134,EDLI_STAT_CURRENT,EDLI,Statutory,pf_component_rate,0.5,Numeric,decimal_rate,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0135,EDLI_STAT_CURRENT,EDLI,Statutory,pf_component_cap,175000,Numeric,INR,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0136,EDLI_STAT_CURRENT,EDLI,Statutory,illustrative_minimum_benefit,250000,Numeric,INR,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0137,EDLI_STAT_CURRENT,EDLI,Statutory,illustrative_maximum_benefit,700000,Numeric,INR,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0138,EDLI_STAT_CURRENT,EDLI,Statutory,part_a_minimum_floor,50000,Numeric,INR,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0139,EDLI_STAT_CURRENT,EDLI,Statutory,continuity_gap_days,60,Numeric,days,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0140,EDLI_STAT_CURRENT,EDLI,Governance,official_calculator_required,True,Boolean,flag,edli_effective_date_rule,2025-07-18,,No,https://www.epfindia.gov.in/EP_Cal/edli.html
+R0141,SUP_DC_01,DC_Superannuation,Financial,salary_escalation_rate,0.065,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard
+R0142,SUP_DC_02,DC_Superannuation,Financial,salary_escalation_rate,0.070,Numeric,decimal_rate,salary_projection,2026-09-01,,Yes,Synthetic scheme design - Hessian-AI educational dashboard

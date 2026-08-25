@@ -1,0 +1,6 @@
+check,exceptions,status,note
+Exactly one active EDLI plan for employee assignment,0,PASS,EDLI is assigned from the effective-date statutory rule set.
+EDLI official calculator required flag is True,0,PASS,Synthetic mechanics do not override official date-sensitive EDLI processing.
+GTI_FLAT_01 cover basis maps to controlled formula template,0,PASS,cover_basis=Flat; expected_template=gti_flat_cover
+GTI_SAL_02 cover basis maps to controlled formula template,0,PASS,cover_basis=Salary Multiple; expected_template=gti_salary_multiple
+GTI_GRADE_03 cover basis maps to controlled formula template,0,PASS,cover_basis=Grade Based; expected_template=gti_grade_based

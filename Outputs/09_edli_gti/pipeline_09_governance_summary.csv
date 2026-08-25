@@ -1,0 +1,8 @@
+governance_item,review_rows,treatment
+EDLI Average Progressive Balance unavailable,0,Final statutory benefit is not fabricated; qualifying Part B range is shown instead.
+EDLI continuity information unavailable,8501,Pipeline does not infer statutory continuity from ordinary completed service.
+EDLI twelve-month average wage unavailable,8501,Current EDLI eligible wage is used only as an explicitly flagged analytical proxy.
+Historical EDLI event requires historical rule set,24,Current statutory rule is not back-cast to earlier death dates.
+GTI Pipeline 06 mortality unavailable,0,Same GTI plan-specific Gompertz-Makeham parameters are calculated directly and source is flagged.
+GTI free-cover-limit underwriting referrals,624,Employee remains covered in analytical pricing basis; underwriting referral is reported separately.
+Historical GTI exposure unavailable,0,Rows without defensible exposure are excluded from expected mortality experience.

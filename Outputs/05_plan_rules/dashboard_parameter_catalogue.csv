@@ -1,0 +1,149 @@
+plan_id,product_type,rule_category,parameter_name,base_parameter_value,selected_parameter_value,value_type,unit,formula_template,effective_dashboard_editable_flag,statutory_locked_flag,input_control_type,formula_template_editable_flag,source_reference
+GRAT_STD_01,Gratuity,Benefit,benefit_days,15,15,Numeric,days,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Benefit,divisor_days,26,26,Numeric,days,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Eligibility,vesting_years_resignation,5,5,Numeric,years,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Eligibility,death_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Eligibility,disability_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Eligibility,part_year_rounding_threshold_months,6,6,Numeric,months,qualifying_service_rounding,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_STD_01,Gratuity,Financial,salary_escalation_rate,0.06,0.06,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic valuation assumption; dashboard scenario input
+GRAT_STD_01,Gratuity,Financial,discount_rate,0.07,0.07,Numeric,decimal_rate,present_value_discounting,True,False,number_input,False,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+GRAT_STD_01,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gompertz_makeham,False,False,locked_display,False,Book Chapter 7; illustrative model family
+GRAT_STD_01,Gratuity,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,withdrawal_model,Weibull,Weibull,Text,model,weibull_withdrawal,False,False,locked_display,False,Book Chapter 8; illustrative model family
+GRAT_STD_01,Gratuity,Demographic,weibull_eta,15,15,Numeric,years,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,weibull_k,0.75,0.75,Numeric,shape,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,disability_annual_q,0.0015,0.0015,Numeric,probability,bernoulli_disability,True,False,number_input,False,Synthetic model parameter
+GRAT_STD_01,Gratuity,Demographic,early_retirement_model,Logistic,Logistic,Text,model,logistic_early_retirement,False,False,locked_display,False,Book Chapter 10; illustrative model family
+GRAT_ENH_02,Gratuity,Benefit,benefit_days,20,20,Numeric,days,gratuity_days_over_divisor,True,False,number_input,False,Synthetic enhanced employer scheme; statutory minimum remains floor
+GRAT_ENH_02,Gratuity,Benefit,divisor_days,26,26,Numeric,days,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Eligibility,vesting_years_resignation,5,5,Numeric,years,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Eligibility,death_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Eligibility,disability_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Eligibility,part_year_rounding_threshold_months,6,6,Numeric,months,qualifying_service_rounding,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_ENH_02,Gratuity,Financial,salary_escalation_rate,0.062,0.062,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic valuation assumption; dashboard scenario input
+GRAT_ENH_02,Gratuity,Financial,discount_rate,0.07,0.07,Numeric,decimal_rate,present_value_discounting,True,False,number_input,False,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+GRAT_ENH_02,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gompertz_makeham,False,False,locked_display,False,Book Chapter 7; illustrative model family
+GRAT_ENH_02,Gratuity,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,withdrawal_model,Weibull,Weibull,Text,model,weibull_withdrawal,False,False,locked_display,False,Book Chapter 8; illustrative model family
+GRAT_ENH_02,Gratuity,Demographic,weibull_eta,15,15,Numeric,years,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,weibull_k,0.75,0.75,Numeric,shape,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,disability_annual_q,0.0015,0.0015,Numeric,probability,bernoulli_disability,True,False,number_input,False,Synthetic model parameter
+GRAT_ENH_02,Gratuity,Demographic,early_retirement_model,Logistic,Logistic,Text,model,logistic_early_retirement,False,False,locked_display,False,Book Chapter 10; illustrative model family
+GRAT_EXEC_03,Gratuity,Benefit,benefit_days,20,20,Numeric,days,gratuity_days_over_divisor,True,False,number_input,False,Synthetic enhanced employer scheme; statutory minimum remains floor
+GRAT_EXEC_03,Gratuity,Benefit,divisor_days,26,26,Numeric,days,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Benefit,salary_basis,eligible_gratuity_wages_monthly,eligible_gratuity_wages_monthly,Text,column,gratuity_days_over_divisor,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Eligibility,vesting_years_resignation,5,5,Numeric,years,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Eligibility,death_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Eligibility,disability_vesting_waiver,True,True,Boolean,flag,gratuity_eligibility,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Eligibility,part_year_rounding_threshold_months,6,6,Numeric,months,qualifying_service_rounding,False,False,locked_display,False,https://www.indiacode.nic.in/handle/123456789/22074
+GRAT_EXEC_03,Gratuity,Financial,salary_escalation_rate,0.065,0.065,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic valuation assumption; dashboard scenario input
+GRAT_EXEC_03,Gratuity,Financial,discount_rate,0.068,0.068,Numeric,decimal_rate,present_value_discounting,True,False,number_input,False,Synthetic valuation assumption; governed under applicable actuarial/accounting basis
+GRAT_EXEC_03,Gratuity,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gompertz_makeham,False,False,locked_display,False,Book Chapter 7; illustrative model family
+GRAT_EXEC_03,Gratuity,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,withdrawal_model,Weibull,Weibull,Text,model,weibull_withdrawal,False,False,locked_display,False,Book Chapter 8; illustrative model family
+GRAT_EXEC_03,Gratuity,Demographic,weibull_eta,15,15,Numeric,years,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,weibull_k,0.75,0.75,Numeric,shape,weibull_withdrawal,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,disability_annual_q,0.0015,0.0015,Numeric,probability,bernoulli_disability,True,False,number_input,False,Synthetic model parameter
+GRAT_EXEC_03,Gratuity,Demographic,early_retirement_model,Logistic,Logistic,Text,model,logistic_early_retirement,False,False,locked_display,False,Book Chapter 10; illustrative model family
+SUP_DC_01,DC_Superannuation,Contribution,contribution_basis,basic_salary_monthly,basic_salary_monthly,Text,column,dc_contribution,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Contribution,employer_contribution_rate,0.15,0.15,Numeric,decimal_rate,dc_contribution,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Contribution,employee_contribution_rate,0,0,Numeric,decimal_rate,dc_contribution,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Contribution,contribution_frequency,Monthly,Monthly,Text,frequency,dc_contribution,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Financial,expected_investment_return,0.065,0.065,Numeric,decimal_rate,dc_accumulation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Financial,annual_charges_rate,0.004,0.004,Numeric,decimal_rate,dc_accumulation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_01,DC_Superannuation,Eligibility,retirement_age,60,60,Numeric,years,dc_retirement,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Contribution,contribution_basis,pensionable_salary_annual,pensionable_salary_annual,Text,column,dc_contribution,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Contribution,employer_contribution_rate,0.1,0.1,Numeric,decimal_rate,dc_contribution,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Contribution,employee_contribution_rate,0.05,0.05,Numeric,decimal_rate,dc_contribution,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Contribution,contribution_frequency,Monthly,Monthly,Text,frequency,dc_contribution,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Financial,expected_investment_return,0.067,0.067,Numeric,decimal_rate,dc_accumulation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Financial,annual_charges_rate,0.004,0.004,Numeric,decimal_rate,dc_accumulation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Eligibility,retirement_age,60,60,Numeric,years,dc_retirement,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Benefit,accrual_rate,0.015,0.015,Numeric,decimal_rate,db_pension_accrual,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Benefit,pensionable_salary_basis,pensionable_salary_annual,pensionable_salary_annual,Text,column,db_pension_accrual,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Benefit,spouse_pension_percentage,0.5,0.5,Numeric,decimal_rate,spouse_pension,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Eligibility,retirement_age,60,60,Numeric,years,db_pension_retirement,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Financial,salary_escalation_rate,0.06,0.06,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Financial,discount_rate,0.07,0.07,Numeric,decimal_rate,present_value_discounting,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Financial,pension_escalation_rate,0.03,0.03,Numeric,decimal_rate,pension_escalation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Demographic,pensioner_mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,pensioner_survival,False,False,locked_display,False,Book Chapters 7 and 22; illustrative model family
+PEN_DB_01,DB_Pension,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+PEN_DB_01,DB_Pension,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+PEN_DB_01,DB_Pension,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+PEN_DB_02,DB_Pension,Benefit,accrual_rate,0.02,0.02,Numeric,decimal_rate,db_pension_accrual,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Benefit,pensionable_salary_basis,pensionable_salary_annual,pensionable_salary_annual,Text,column,db_pension_accrual,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Benefit,spouse_pension_percentage,0.67,0.67,Numeric,decimal_rate,spouse_pension,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Eligibility,retirement_age,60,60,Numeric,years,db_pension_retirement,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Financial,salary_escalation_rate,0.065,0.065,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Financial,discount_rate,0.068,0.068,Numeric,decimal_rate,present_value_discounting,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Financial,pension_escalation_rate,0.03,0.03,Numeric,decimal_rate,pension_escalation,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Demographic,pensioner_mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,pensioner_survival,False,False,locked_display,False,Book Chapters 7 and 22; illustrative model family
+PEN_DB_02,DB_Pension,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+PEN_DB_02,DB_Pension,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+PEN_DB_02,DB_Pension,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gompertz_makeham,True,False,number_input,False,Synthetic model parameter
+GTI_FLAT_01,GTI,Benefit,cover_basis,Flat,Flat,Text,basis,gti_flat_cover,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_FLAT_01,GTI,Benefit,flat_sum_assured,2000000,2000000,Numeric,INR,gti_flat_cover,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_FLAT_01,GTI,Pricing,gross_premium_loading_rate,0.2,0.2,Numeric,decimal_rate,gti_gross_premium,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_FLAT_01,GTI,Underwriting,free_cover_limit,5000000,5000000,Numeric,INR,gti_underwriting,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Benefit,cover_basis,Salary Multiple,Salary Multiple,Text,basis,gti_salary_multiple,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Benefit,salary_basis,gross_compensation_annual,gross_compensation_annual,Text,column,gti_salary_multiple,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Benefit,salary_multiple,3,3,Numeric,multiple,gti_salary_multiple,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Benefit,minimum_cover,1500000,1500000,Numeric,INR,gti_salary_multiple,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Benefit,maximum_cover,10000000,10000000,Numeric,INR,gti_salary_multiple,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Pricing,gross_premium_loading_rate,0.2,0.2,Numeric,decimal_rate,gti_gross_premium,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_SAL_02,GTI,Underwriting,free_cover_limit,7500000,7500000,Numeric,INR,gti_underwriting,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,cover_basis,Grade Based,Grade Based,Text,basis,gti_grade_based,True,False,controlled_select,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E1_cover,1500000,1500000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E2_cover,2000000,2000000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E3_cover,2500000,2500000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E4_cover,3000000,3000000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E5_cover,4000000,4000000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E6_cover,5000000,5000000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E7_cover,7500000,7500000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Benefit,E8_cover,10000000,10000000,Numeric,INR,gti_grade_based,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Pricing,gross_premium_loading_rate,0.2,0.2,Numeric,decimal_rate,gti_gross_premium,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_GRADE_03,GTI,Underwriting,free_cover_limit,5000000,5000000,Numeric,INR,gti_underwriting,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+GTI_FLAT_01,GTI,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gti_expected_claims,False,False,locked_display,False,Book Chapters 7 and 25; illustrative model family
+GTI_FLAT_01,GTI,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_FLAT_01,GTI,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_FLAT_01,GTI,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_FLAT_01,GTI,Credibility,credibility_confidence_z,1.96,1.96,Numeric,z_score,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+GTI_FLAT_01,GTI,Credibility,credibility_tolerance_k,0.1,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+GTI_SAL_02,GTI,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gti_expected_claims,False,False,locked_display,False,Book Chapters 7 and 25; illustrative model family
+GTI_SAL_02,GTI,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_SAL_02,GTI,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_SAL_02,GTI,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_SAL_02,GTI,Credibility,credibility_confidence_z,1.96,1.96,Numeric,z_score,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+GTI_SAL_02,GTI,Credibility,credibility_tolerance_k,0.1,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+GTI_GRADE_03,GTI,Demographic,mortality_model,Gompertz-Makeham,Gompertz-Makeham,Text,model,gti_expected_claims,False,False,locked_display,False,Book Chapters 7 and 25; illustrative model family
+GTI_GRADE_03,GTI,Demographic,mortality_A,0.0002,0.0002,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_GRADE_03,GTI,Demographic,mortality_B,1e-05,1e-05,Numeric,intensity,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_GRADE_03,GTI,Demographic,mortality_c,1.1,1.1,Numeric,multiplier,gti_expected_claims,True,False,number_input,False,Synthetic model parameter
+GTI_GRADE_03,GTI,Credibility,credibility_confidence_z,1.96,1.96,Numeric,z_score,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+GTI_GRADE_03,GTI,Credibility,credibility_tolerance_k,0.1,0.1,Numeric,relative_tolerance,limited_fluctuation_credibility,True,False,number_input,False,Book Chapter 25; illustrative credibility parameter
+EDLI_STAT_CURRENT,EDLI,Statutory,rule_basis,Effective-date statutory rule,Effective-date statutory rule,Text,basis,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,wage_factor,35,35,Numeric,multiple,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,wage_ceiling_monthly,15000,15000,Numeric,INR_per_month,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,pf_component_rate,0.5,0.5,Numeric,decimal_rate,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,pf_component_cap,175000,175000,Numeric,INR,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,illustrative_minimum_benefit,250000,250000,Numeric,INR,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,illustrative_maximum_benefit,700000,700000,Numeric,INR,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,part_a_minimum_floor,50000,50000,Numeric,INR,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Statutory,continuity_gap_days,60,60,Numeric,days,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+EDLI_STAT_CURRENT,EDLI,Governance,official_calculator_required,True,True,Boolean,flag,edli_effective_date_rule,False,True,locked_display,False,https://www.epfindia.gov.in/EP_Cal/edli.html
+SUP_DC_01,DC_Superannuation,Financial,salary_escalation_rate,0.065,0.065,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+SUP_DC_02,DC_Superannuation,Financial,salary_escalation_rate,0.07,0.07,Numeric,decimal_rate,salary_projection,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Demographic,weibull_eta,15,15,Numeric,years,weibull_withdrawal,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Demographic,weibull_k,0.75,0.75,Numeric,shape,weibull_withdrawal,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_01,DB_Pension,Demographic,disability_annual_q,0.0015,0.0015,Numeric,probability,bernoulli_disability,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Demographic,weibull_eta,15,15,Numeric,years,weibull_withdrawal,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Demographic,weibull_k,0.75,0.75,Numeric,shape,weibull_withdrawal,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard
+PEN_DB_02,DB_Pension,Demographic,disability_annual_q,0.0015,0.0015,Numeric,probability,bernoulli_disability,True,False,number_input,False,Synthetic scheme design - Hessian-AI educational dashboard

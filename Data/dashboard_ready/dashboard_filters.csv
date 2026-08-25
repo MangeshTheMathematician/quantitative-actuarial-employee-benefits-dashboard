@@ -1,0 +1,30 @@
+filter_name,filter_value,pipeline_11_version
+department,Corporate,P11-C01
+department,Customer Service,P11-C01
+department,Finance,P11-C01
+department,Human Resources,P11-C01
+department,Manufacturing,P11-C01
+department,Operations,P11-C01
+department,Research,P11-C01
+department,Sales,P11-C01
+department,Supply Chain,P11-C01
+department,Technology,P11-C01
+grade,E1,P11-C01
+grade,E2,P11-C01
+grade,E3,P11-C01
+grade,E4,P11-C01
+grade,E5,P11-C01
+grade,E6,P11-C01
+grade,E7,P11-C01
+grade,E8,P11-C01
+gratuity_plan_id,GRAT_ENH_02,P11-C01
+gratuity_plan_id,GRAT_EXEC_03,P11-C01
+gratuity_plan_id,GRAT_STD_01,P11-C01
+db_pension_plan_id,PEN_DB_01,P11-C01
+db_pension_plan_id,PEN_DB_02,P11-C01
+dc_superannuation_plan_id,SUP_DC_01,P11-C01
+dc_superannuation_plan_id,SUP_DC_02,P11-C01
+gti_pricing_plan_id,GTI_FLAT_01,P11-C01
+gti_pricing_plan_id,GTI_GRADE_03,P11-C01
+gti_pricing_plan_id,GTI_SAL_02,P11-C01
+edli_plan_id,EDLI_STAT_CURRENT,P11-C01

@@ -1,0 +1,16 @@
+check,exceptions,status,note
+employee feature employee_id unique,0,PASS,
+attained age within model range,0,PASS,
+completed service non-negative,0,PASS,
+remaining service non-negative,0,PASS,
+non-active employee remaining service equals zero,0,PASS,
+annual basic equals monthly basic x 12,0,PASS,
+annual gratuity wage equals monthly wage x 12,0,PASS,
+DB scope is subset of superannuation scope,0,PASS,
+DC scope is subset of superannuation scope,0,PASS,
+usable salary growth has positive interval,0,PASS,
+model-usable exposure is positive,0,PASS,
+single exposure record not greater than one year,0,PASS,Annual synthetic experience-record design
+event observed plus censored equals one,0,PASS,
+maximum one event cause per exposure row,0,PASS,
+observed event maps to one known cause,0,PASS,

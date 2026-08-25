@@ -1,0 +1,6 @@
+dataset,rows,columns,status
+employee_census_clean.csv,9950,59,Cleaned + audit flags
+salary_history_clean.csv,39411,17,Cleaned + audit flags
+claims_history_clean.csv,43595,18,Cleaned + audit flags
+plan_assets_clean.csv,25,10,Validated; values unchanged
+plan_rules_assumptions_clean.csv,148,13,Validated; values unchanged

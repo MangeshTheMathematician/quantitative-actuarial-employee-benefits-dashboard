@@ -1,0 +1,10 @@
+file_name,row_count,column_count,purpose,valuation_date,pipeline_11_version
+dashboard_kpi_cards.csv,16,10,Executive KPI cards; one row per dashboard KPI.,2026-09-01,P11-C01
+dashboard_product_overview.csv,5,21,Product-level employee-benefits portfolio summary.,2026-09-01,P11-C01
+dashboard_plan_overview.csv,11,26,"Plan-level funding, contribution and risk summary.",2026-09-01,P11-C01
+dashboard_employee_detail.csv,9950,30,Employee-level dashboard drill-down dataset.,2026-09-01,P11-C01
+dashboard_segment_risk.csv,18,27,"Department, location and grade concentration analytics.",2026-09-01,P11-C01
+dashboard_governance.csv,13,8,Consolidated model-governance register.,2026-09-01,P11-C01
+dashboard_validation.csv,15,6,Portfolio mathematical and structural validation checks.,2026-09-01,P11-C01
+dashboard_filters.csv,29,3,Controlled dashboard filter values.,2026-09-01,P11-C01
+dashboard_visual_catalog.csv,12,9,Approved Streamlit visualization architecture.,2026-09-01,P11-C01

@@ -1,0 +1,12 @@
+plan_id,product_type,active_rule_count,active_parameter_count
+EDLI_STAT_CURRENT,EDLI,10,10
+GRAT_ENH_02,Gratuity,18,18
+GRAT_EXEC_03,Gratuity,18,18
+GRAT_STD_01,Gratuity,18,18
+GTI_FLAT_01,GTI,10,10
+GTI_GRADE_03,GTI,17,17
+GTI_SAL_02,GTI,13,13
+PEN_DB_01,DB_Pension,14,14
+PEN_DB_02,DB_Pension,14,14
+SUP_DC_01,DC_Superannuation,8,8
+SUP_DC_02,DC_Superannuation,8,8

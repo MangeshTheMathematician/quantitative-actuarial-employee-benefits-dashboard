@@ -1,0 +1,9 @@
+dataset,source,pipeline_11_version
+company_kpis,IN_MEMORY_PIPELINE_10,P11-C01
+product_summary,IN_MEMORY_PIPELINE_10,P11-C01
+plan_summary,IN_MEMORY_PIPELINE_10,P11-C01
+employee_risk_matrix,IN_MEMORY_PIPELINE_10,P11-C01
+segment_summary,IN_MEMORY_PIPELINE_10,P11-C01
+reconciliation,IN_MEMORY_PIPELINE_10,P11-C01
+validation,IN_MEMORY_PIPELINE_10,P11-C01
+governance,IN_MEMORY_PIPELINE_10,P11-C01

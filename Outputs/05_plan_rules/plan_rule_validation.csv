@@ -1,0 +1,14 @@
+check,exceptions,status,note
+rule_id is unique,0,PASS,
+value_type is supported,0,PASS,
+dashboard_editable_flag is supported,0,PASS,
+rule values parse by declared value_type,0,PASS,
+formula templates are registered,0,PASS,
+one active rule per plan and parameter,0,PASS,
+required parameters complete,0,PASS,
+numeric parameter domains valid,0,PASS,
+formula templates match product,0,PASS,
+column-based parameters reference valid employee fields,0,PASS,
+employee plan assignments valid,0,PASS,
+EDLI rules remain dashboard locked,0,PASS,EDLI is effective-date/statutory rather than a freely user-designed benefit formula.
+active rules have source reference,0,PASS,

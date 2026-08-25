@@ -1,0 +1,6 @@
+governance_item,review_rows,treatment
+DC salary escalation not supplied in plan rules,0,0% salary-growth baseline used and explicitly flagged
+DC opening member corpus unavailable,4318,Future-contribution corpus shown separately; pooled plan assets are not substituted
+DB full competing-decrement survival unavailable,52,DB mortality-only survival used as flagged fallback
+DB spouse continuation data incomplete,81,Known spouse stream valued; missing survivor data flagged
+DB plan assets unavailable,0,Liability retained; funded status left unreported

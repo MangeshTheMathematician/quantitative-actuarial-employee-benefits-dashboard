@@ -1,0 +1,14 @@
+check,exceptions,status,note
+employee Gratuity basis unique,0,PASS,
+current Gratuity salary basis positive,0,PASS,
+Gratuity divisor positive,0,PASS,
+active-exit PUC benefits do not exceed full benefits,0,PASS,
+retirement PUC benefit does not exceed full benefit,0,PASS,
+active-exit Gratuity PVs non-negative,0,PASS,
+employee DBO equals sum of cause components,0,PASS,
+plan DBO total equals employee DBO total,0,PASS,
+employees with unresolved retirement horizon,48,REVIEW,DBO is not forced to zero. Retirement/status must be resolved before final production valuation.
+Gratuity plans have funding asset records,0,PASS,Liability remains valid independently of funding assets.
+Base sensitivity reconciles to modelled DBO,0,PASS,
+discount sensitivity direction valid,0,PASS,
+salary sensitivity direction valid,0,PASS,

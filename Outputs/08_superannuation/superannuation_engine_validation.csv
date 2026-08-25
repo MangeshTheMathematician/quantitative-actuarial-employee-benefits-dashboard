@@ -1,0 +1,6 @@
+check,status,exception_rows
+DC projected corpus non-negative,PASS,0
+DB PUC pension <= full projected pension,PASS,0
+DB pension liability valid,PASS,0
+"DB retirement probability in [0,1]",PASS,0
+DB discount sensitivity direction,PASS,0

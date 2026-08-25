@@ -1,0 +1,4 @@
+plan_id,gratuity_salary_basis_column,benefit_days,divisor_days,gratuity_benefit_rate,vesting_years_resignation,death_vesting_waiver,disability_vesting_waiver,part_year_rounding_threshold_months,salary_escalation_rate,discount_rate,active_member_count,gratuity_engine_version
+GRAT_ENH_02,eligible_gratuity_wages_monthly,20.0,26.0,0.7692307692307693,5.0,True,True,6.0,0.062,0.07,1301,P07-C01
+GRAT_EXEC_03,eligible_gratuity_wages_monthly,20.0,26.0,0.7692307692307693,5.0,True,True,6.0,0.065,0.068,375,P07-C01
+GRAT_STD_01,eligible_gratuity_wages_monthly,15.0,26.0,0.5769230769230769,5.0,True,True,6.0,0.06,0.07,6999,P07-C01

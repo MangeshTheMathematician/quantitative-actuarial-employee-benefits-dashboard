@@ -1,0 +1,12 @@
+metric,value
+valuation_date,2026-09-01
+decrement_engine_version,P06-C01
+current_gratuity_members_modelled,8675
+product_mortality_assignment_rows,17902
+active_service_projection_rows,197805
+employees_with_future_projection,8651
+employees_with_zero_or_review_horizon,49
+early_retirement_logistic_observations,42421
+early_retirement_observed_events,103
+historical_experience_AE_rows,24
+decrement_parameter_validation_failures,0

@@ -1,0 +1,10 @@
+metric,amount,source_pipeline,pipeline_10_version
+Gratuity DBO,2972272128.595225,Pipeline 07,P10-C01
+DB Pension DBO,1658425182.1495342,Pipeline 08,P10-C01
+Combined DB Liability,4630697310.744759,Pipeline 10 reconciliation,P10-C01
+Combined DB Plan Assets,1648171000.0,Validated plan assets,P10-C01
+Combined DB Net Funded Position,-2982526310.7447586,Pipeline 10 reconciliation,P10-C01
+DC Future-Contribution Corpus,59467819156.37224,Pipeline 08,P10-C01
+GTI Total Sum Assured,26662668000.0,Pipeline 09,P10-C01
+GTI Fresh Expected Claims,22906469.340783253,Pipeline 09,P10-C01
+GTI Fresh Gross Premium,28633086.675979063,Pipeline 10 controlled pricing basis,P10-C01

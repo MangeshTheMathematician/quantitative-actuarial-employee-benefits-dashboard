@@ -1,0 +1,4 @@
+coefficient_name,coefficient,standard_error,age_center_years,service_center_years,predictor_scale_years,observations,observed_early_retirements,expected_early_retirements,actual_to_expected,log_likelihood,converged_flag,iterations,model_source,decrement_engine_version
+Intercept,-6.02289084137633,0.09911120497352627,35.961877972278174,5.305518728770075,10.0,42421,103,103.0,1.0,-722.525164699071,True,4,MLE from employee-year exposure; predictors = age and service,P06-C01
+Age_per_10_years,-0.10271214089221187,0.11938374354839124,35.961877972278174,5.305518728770075,10.0,42421,103,103.0,1.0,-722.525164699071,True,4,MLE from employee-year exposure; predictors = age and service,P06-C01
+Service_per_10_years,-0.054879683877578474,0.238114956561011,35.961877972278174,5.305518728770075,10.0,42421,103,103.0,1.0,-722.525164699071,True,4,MLE from employee-year exposure; predictors = age and service,P06-C01

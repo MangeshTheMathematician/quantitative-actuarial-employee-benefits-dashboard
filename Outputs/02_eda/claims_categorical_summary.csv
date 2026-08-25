@@ -1,0 +1,18 @@
+dataset,column,value,count,pct
+claims,event_type,<MISSING>,41384,94.9283174675995
+claims,event_type,Withdrawal,1337,3.0668654662231907
+claims,event_type,Retirement,316,0.724853767633903
+claims,event_type,Death,237,0.5436403257254272
+claims,event_type,Early Retirement,205,0.47023741254731044
+claims,event_type,Disability,116,0.26608556027067326
+claims,product_type,Experience,42421,97.30703062277784
+claims,product_type,Gratuity,574,1.3166647551324693
+claims,product_type,DC_Superannuation,499,1.1446266773712581
+claims,product_type,EDLI,51,0.11698589287762358
+claims,product_type,GTI,50,0.11469205184080744
+claims,claim_status,Not_Applicable,42421,97.30703062277784
+claims,claim_status,Paid,978,2.2433765340061935
+claims,claim_status,Approved,73,0.16745039568757886
+claims,claim_status,Rejected,58,0.13304278013533663
+claims,claim_status,Pending,55,0.12616125702488817
+claims,claim_status,Reported,10,0.022938410368161487

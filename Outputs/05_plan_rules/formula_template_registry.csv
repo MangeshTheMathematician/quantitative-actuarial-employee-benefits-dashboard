@@ -1,0 +1,26 @@
+formula_template,formula_family,purpose,formula_template_editable_flag,rule_engine_version
+gratuity_days_over_divisor,Gratuity,Benefit days divided by divisor applied to eligible wages,False,P05-C01
+gratuity_eligibility,Gratuity,Gratuity vesting and event-specific eligibility,False,P05-C01
+qualifying_service_rounding,Gratuity,Qualifying-service part-year treatment,False,P05-C01
+salary_projection,Financial,Future salary projection,False,P05-C01
+present_value_discounting,Financial,Present-value discounting,False,P05-C01
+gompertz_makeham,Demographic,Age-dependent mortality intensity,False,P05-C01
+weibull_withdrawal,Demographic,Service-dependent withdrawal probability,False,P05-C01
+bernoulli_disability,Demographic,Employee-level annual disability probability,False,P05-C01
+logistic_early_retirement,Demographic,Employee-level early-retirement probability,False,P05-C01
+dc_contribution,DC_Superannuation,Employer and employee DC contribution,False,P05-C01
+dc_accumulation,DC_Superannuation,Defined Contribution corpus accumulation,False,P05-C01
+dc_retirement,DC_Superannuation,Defined Contribution retirement age,False,P05-C01
+db_pension_accrual,DB_Pension,Defined Benefit pension accrual formula,False,P05-C01
+spouse_pension,DB_Pension,Spouse or survivor pension percentage,False,P05-C01
+db_pension_retirement,DB_Pension,Defined Benefit pension retirement age,False,P05-C01
+pension_escalation,DB_Pension,Post-retirement pension escalation,False,P05-C01
+pensioner_survival,DB_Pension,Pensioner survival weighting,False,P05-C01
+edli_effective_date_rule,EDLI,Effective-date statutory EDLI calculation,False,P05-C01
+gti_flat_cover,GTI,Flat GTI Sum Assured,False,P05-C01
+gti_salary_multiple,GTI,Salary-multiple GTI cover,False,P05-C01
+gti_grade_based,GTI,Grade-based GTI cover,False,P05-C01
+gti_expected_claims,GTI,GTI expected claims,False,P05-C01
+gti_gross_premium,GTI,GTI gross premium loading,False,P05-C01
+gti_underwriting,GTI,GTI free-cover and underwriting limits,False,P05-C01
+limited_fluctuation_credibility,GTI,GTI credibility and experience adjustment,False,P05-C01

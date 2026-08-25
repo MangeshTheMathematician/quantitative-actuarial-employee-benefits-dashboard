@@ -1,0 +1,115 @@
+plan_id,product_type,parameter_name,numeric_value,domain_rule,domain_valid_flag
+GRAT_STD_01,Gratuity,benefit_days,15.0,value > 0,True
+GRAT_STD_01,Gratuity,divisor_days,26.0,value > 0,True
+GRAT_STD_01,Gratuity,vesting_years_resignation,5.0,value >= 0,True
+GRAT_STD_01,Gratuity,part_year_rounding_threshold_months,6.0,value >= 0,True
+GRAT_STD_01,Gratuity,salary_escalation_rate,0.06,value > -1 so 1 + rate remains positive,True
+GRAT_STD_01,Gratuity,discount_rate,0.07,value > -1 so 1 + rate remains positive,True
+GRAT_STD_01,Gratuity,mortality_A,0.0002,value >= 0,True
+GRAT_STD_01,Gratuity,mortality_B,1e-05,value >= 0,True
+GRAT_STD_01,Gratuity,mortality_c,1.1,value > 0,True
+GRAT_STD_01,Gratuity,weibull_eta,15.0,value > 0,True
+GRAT_STD_01,Gratuity,weibull_k,0.75,value > 0,True
+GRAT_STD_01,Gratuity,disability_annual_q,0.0015,0 <= value <= 1,True
+GRAT_ENH_02,Gratuity,benefit_days,20.0,value > 0,True
+GRAT_ENH_02,Gratuity,divisor_days,26.0,value > 0,True
+GRAT_ENH_02,Gratuity,vesting_years_resignation,5.0,value >= 0,True
+GRAT_ENH_02,Gratuity,part_year_rounding_threshold_months,6.0,value >= 0,True
+GRAT_ENH_02,Gratuity,salary_escalation_rate,0.062,value > -1 so 1 + rate remains positive,True
+GRAT_ENH_02,Gratuity,discount_rate,0.07,value > -1 so 1 + rate remains positive,True
+GRAT_ENH_02,Gratuity,mortality_A,0.0002,value >= 0,True
+GRAT_ENH_02,Gratuity,mortality_B,1e-05,value >= 0,True
+GRAT_ENH_02,Gratuity,mortality_c,1.1,value > 0,True
+GRAT_ENH_02,Gratuity,weibull_eta,15.0,value > 0,True
+GRAT_ENH_02,Gratuity,weibull_k,0.75,value > 0,True
+GRAT_ENH_02,Gratuity,disability_annual_q,0.0015,0 <= value <= 1,True
+GRAT_EXEC_03,Gratuity,benefit_days,20.0,value > 0,True
+GRAT_EXEC_03,Gratuity,divisor_days,26.0,value > 0,True
+GRAT_EXEC_03,Gratuity,vesting_years_resignation,5.0,value >= 0,True
+GRAT_EXEC_03,Gratuity,part_year_rounding_threshold_months,6.0,value >= 0,True
+GRAT_EXEC_03,Gratuity,salary_escalation_rate,0.065,value > -1 so 1 + rate remains positive,True
+GRAT_EXEC_03,Gratuity,discount_rate,0.068,value > -1 so 1 + rate remains positive,True
+GRAT_EXEC_03,Gratuity,mortality_A,0.0002,value >= 0,True
+GRAT_EXEC_03,Gratuity,mortality_B,1e-05,value >= 0,True
+GRAT_EXEC_03,Gratuity,mortality_c,1.1,value > 0,True
+GRAT_EXEC_03,Gratuity,weibull_eta,15.0,value > 0,True
+GRAT_EXEC_03,Gratuity,weibull_k,0.75,value > 0,True
+GRAT_EXEC_03,Gratuity,disability_annual_q,0.0015,0 <= value <= 1,True
+SUP_DC_01,DC_Superannuation,employer_contribution_rate,0.15,0 <= value <= 1,True
+SUP_DC_01,DC_Superannuation,employee_contribution_rate,0.0,0 <= value <= 1,True
+SUP_DC_01,DC_Superannuation,expected_investment_return,0.065,value > -1 so 1 + rate remains positive,True
+SUP_DC_01,DC_Superannuation,annual_charges_rate,0.004,0 <= value <= 1,True
+SUP_DC_01,DC_Superannuation,retirement_age,60.0,value > 0,True
+SUP_DC_02,DC_Superannuation,employer_contribution_rate,0.1,0 <= value <= 1,True
+SUP_DC_02,DC_Superannuation,employee_contribution_rate,0.05,0 <= value <= 1,True
+SUP_DC_02,DC_Superannuation,expected_investment_return,0.067,value > -1 so 1 + rate remains positive,True
+SUP_DC_02,DC_Superannuation,annual_charges_rate,0.004,0 <= value <= 1,True
+SUP_DC_02,DC_Superannuation,retirement_age,60.0,value > 0,True
+PEN_DB_01,DB_Pension,accrual_rate,0.015,0 <= value <= 1,True
+PEN_DB_01,DB_Pension,spouse_pension_percentage,0.5,0 <= value <= 1,True
+PEN_DB_01,DB_Pension,retirement_age,60.0,value > 0,True
+PEN_DB_01,DB_Pension,salary_escalation_rate,0.06,value > -1 so 1 + rate remains positive,True
+PEN_DB_01,DB_Pension,discount_rate,0.07,value > -1 so 1 + rate remains positive,True
+PEN_DB_01,DB_Pension,pension_escalation_rate,0.03,value > -1 so 1 + rate remains positive,True
+PEN_DB_01,DB_Pension,mortality_A,0.0002,value >= 0,True
+PEN_DB_01,DB_Pension,mortality_B,1e-05,value >= 0,True
+PEN_DB_01,DB_Pension,mortality_c,1.1,value > 0,True
+PEN_DB_02,DB_Pension,accrual_rate,0.02,0 <= value <= 1,True
+PEN_DB_02,DB_Pension,spouse_pension_percentage,0.67,0 <= value <= 1,True
+PEN_DB_02,DB_Pension,retirement_age,60.0,value > 0,True
+PEN_DB_02,DB_Pension,salary_escalation_rate,0.065,value > -1 so 1 + rate remains positive,True
+PEN_DB_02,DB_Pension,discount_rate,0.068,value > -1 so 1 + rate remains positive,True
+PEN_DB_02,DB_Pension,pension_escalation_rate,0.03,value > -1 so 1 + rate remains positive,True
+PEN_DB_02,DB_Pension,mortality_A,0.0002,value >= 0,True
+PEN_DB_02,DB_Pension,mortality_B,1e-05,value >= 0,True
+PEN_DB_02,DB_Pension,mortality_c,1.1,value > 0,True
+GTI_FLAT_01,GTI,flat_sum_assured,2000000.0,value > 0,True
+GTI_FLAT_01,GTI,gross_premium_loading_rate,0.2,0 <= value < 1,True
+GTI_FLAT_01,GTI,free_cover_limit,5000000.0,value > 0,True
+GTI_SAL_02,GTI,salary_multiple,3.0,value > 0,True
+GTI_SAL_02,GTI,minimum_cover,1500000.0,value > 0,True
+GTI_SAL_02,GTI,maximum_cover,10000000.0,value > 0,True
+GTI_SAL_02,GTI,gross_premium_loading_rate,0.2,0 <= value < 1,True
+GTI_SAL_02,GTI,free_cover_limit,7500000.0,value > 0,True
+GTI_GRADE_03,GTI,E1_cover,1500000.0,value > 0,True
+GTI_GRADE_03,GTI,E2_cover,2000000.0,value > 0,True
+GTI_GRADE_03,GTI,E3_cover,2500000.0,value > 0,True
+GTI_GRADE_03,GTI,E4_cover,3000000.0,value > 0,True
+GTI_GRADE_03,GTI,E5_cover,4000000.0,value > 0,True
+GTI_GRADE_03,GTI,E6_cover,5000000.0,value > 0,True
+GTI_GRADE_03,GTI,E7_cover,7500000.0,value > 0,True
+GTI_GRADE_03,GTI,E8_cover,10000000.0,value > 0,True
+GTI_GRADE_03,GTI,gross_premium_loading_rate,0.2,0 <= value < 1,True
+GTI_GRADE_03,GTI,free_cover_limit,5000000.0,value > 0,True
+GTI_FLAT_01,GTI,mortality_A,0.0002,value >= 0,True
+GTI_FLAT_01,GTI,mortality_B,1e-05,value >= 0,True
+GTI_FLAT_01,GTI,mortality_c,1.1,value > 0,True
+GTI_FLAT_01,GTI,credibility_confidence_z,1.96,value > 0,True
+GTI_FLAT_01,GTI,credibility_tolerance_k,0.1,value > 0,True
+GTI_SAL_02,GTI,mortality_A,0.0002,value >= 0,True
+GTI_SAL_02,GTI,mortality_B,1e-05,value >= 0,True
+GTI_SAL_02,GTI,mortality_c,1.1,value > 0,True
+GTI_SAL_02,GTI,credibility_confidence_z,1.96,value > 0,True
+GTI_SAL_02,GTI,credibility_tolerance_k,0.1,value > 0,True
+GTI_GRADE_03,GTI,mortality_A,0.0002,value >= 0,True
+GTI_GRADE_03,GTI,mortality_B,1e-05,value >= 0,True
+GTI_GRADE_03,GTI,mortality_c,1.1,value > 0,True
+GTI_GRADE_03,GTI,credibility_confidence_z,1.96,value > 0,True
+GTI_GRADE_03,GTI,credibility_tolerance_k,0.1,value > 0,True
+EDLI_STAT_CURRENT,EDLI,wage_factor,35.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,wage_ceiling_monthly,15000.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,pf_component_rate,0.5,0 <= value <= 1,True
+EDLI_STAT_CURRENT,EDLI,pf_component_cap,175000.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,illustrative_minimum_benefit,250000.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,illustrative_maximum_benefit,700000.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,part_a_minimum_floor,50000.0,value > 0,True
+EDLI_STAT_CURRENT,EDLI,continuity_gap_days,60.0,value >= 0,True
+SUP_DC_01,DC_Superannuation,salary_escalation_rate,0.065,value > -1 so 1 + rate remains positive,True
+SUP_DC_02,DC_Superannuation,salary_escalation_rate,0.07,value > -1 so 1 + rate remains positive,True
+PEN_DB_01,DB_Pension,weibull_eta,15.0,value > 0,True
+PEN_DB_01,DB_Pension,weibull_k,0.75,value > 0,True
+PEN_DB_01,DB_Pension,disability_annual_q,0.0015,0 <= value <= 1,True
+PEN_DB_02,DB_Pension,weibull_eta,15.0,value > 0,True
+PEN_DB_02,DB_Pension,weibull_k,0.75,value > 0,True
+PEN_DB_02,DB_Pension,disability_annual_q,0.0015,0 <= value <= 1,True
+GTI_SAL_02,GTI,minimum_cover <= maximum_cover,,minimum_cover <= maximum_cover,True

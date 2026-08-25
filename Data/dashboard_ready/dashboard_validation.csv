@@ -1,0 +1,16 @@
+check,exceptions,status,note,failure_flag,pipeline_11_version
+Pipeline 07 Gratuity employee output available,0,PASS,,False,P11-C01
+Pipeline 08 DB Pension output available,0,PASS,,False,P11-C01
+Pipeline 08 DC Superannuation output available,0,PASS,,False,P11-C01
+Pipeline 09 GTI output available,0,PASS,,False,P11-C01
+Pipeline 09 EDLI output available,0,PASS,,False,P11-C01
+Portfolio employee matrix unique,0,PASS,,False,P11-C01
+Gratuity DBO non-negative,0,PASS,,False,P11-C01
+DB Pension DBO non-negative,0,PASS,,False,P11-C01
+GTI Sum Assured non-negative,0,PASS,,False,P11-C01
+GTI fresh expected claims non-negative,0,PASS,,False,P11-C01
+GTI fresh gross premium >= fresh expected claims,0,PASS,,False,P11-C01
+Combined DB liability reconciles,0,PASS,,False,P11-C01
+Combined DB net funded position reconciles,0,PASS,,False,P11-C01
+Combined DB funding ratio reconciles,0,PASS,,False,P11-C01
+Plan-level DB liabilities reconcile to company DB liability,0,PASS,,False,P11-C01

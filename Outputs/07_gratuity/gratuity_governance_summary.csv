@@ -1,0 +1,14 @@
+metric,value
+valuation_date,2026-09-01
+gratuity_engine_version,P07-C01
+active_gratuity_members,8675
+employees_modelled,8627
+employees_requiring_retirement_horizon_review,48
+future_active_exit_projection_rows,197293
+gratuity_plans,3
+modelled_company_gratuity_DBO,2972272128.5952253
+company_plan_assets,659564000.0
+company_funding_ratio,0.2219056571753837
+benefit_cap_rule,No separate benefit-cap parameter exists in current locked rule schema; no cap silently inserted.
+fixed_term_expiry_treatment,Not separately modelled because current census does not contain contractual expiry date.
+cashflow_timing_convention,End of projection period

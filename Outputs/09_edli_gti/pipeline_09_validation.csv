@@ -1,0 +1,12 @@
+check,exceptions,status,note
+EDLI employee basis unique,0,PASS,
+EDLI capped wages non-negative,0,PASS,
+EDLI Part B lower range <= upper range,0,PASS,
+EDLI qualifying Part B upper range <= maximum,0,PASS,
+GTI Sum Assured positive,0,PASS,
+"GTI mortality probability within [0,1]",0,PASS,
+GTI fresh expected claim cost non-negative,0,PASS,
+GTI gross premium loading denominator positive,0,PASS,
+GTI gross premium >= adjusted expected claims,0,PASS,
+GTI plan premium reconciles to employee premium,0,PASS,
+Historical GTI expected deaths non-negative,0,PASS,

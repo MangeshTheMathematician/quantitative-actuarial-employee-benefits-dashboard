@@ -1,0 +1,6 @@
+dataset,rows,columns,expected_columns,schema_match,missing_columns,extra_columns,column_order_match
+employee,10000,40,40,True,,,True
+salary,39411,8,8,True,,,True
+claims,43595,11,11,True,,,True
+assets,25,10,10,True,,,True
+rules,148,13,13,True,,,True

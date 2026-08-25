@@ -1,0 +1,12 @@
+plan_id,product_type,salary_escalation_rate,discount_rate,expected_investment_return,pension_escalation_rate,gross_premium_loading_rate,consistency_note
+EDLI_STAT_CURRENT,EDLI,,,,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GRAT_ENH_02,Gratuity,0.062,0.07,,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GRAT_EXEC_03,Gratuity,0.065,0.068,,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GRAT_STD_01,Gratuity,0.06,0.07,,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GTI_FLAT_01,GTI,,,,,0.2,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GTI_GRADE_03,GTI,,,,,0.2,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+GTI_SAL_02,GTI,,,,,0.2,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+PEN_DB_01,DB_Pension,0.06,0.07,,0.03,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+PEN_DB_02,DB_Pension,0.065,0.068,,0.03,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+SUP_DC_01,DC_Superannuation,0.065,,0.065,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.
+SUP_DC_02,DC_Superannuation,0.07,,0.067,,,Financial assumptions remain conceptually separate; no equality constraint is imposed.

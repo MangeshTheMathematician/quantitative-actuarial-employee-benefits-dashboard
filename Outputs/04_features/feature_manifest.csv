@@ -1,0 +1,4 @@
+dataset,rows,columns,feature_version,purpose
+employee_actuarial_features.csv,9950,89,P04-C01,"Age, service, retirement horizon, salary bases, segmentation and product scope"
+salary_experience_features.csv,39411,38,P04-C01,Historical salary movement and annualized salary-growth experience
+decrement_exposure_features.csv,42421,48,P04-C01,"Employee-year exposure, age/service duration, events and censoring for decrement models"

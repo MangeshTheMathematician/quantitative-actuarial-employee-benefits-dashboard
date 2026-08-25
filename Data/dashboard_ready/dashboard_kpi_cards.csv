@@ -1,0 +1,17 @@
+page,section,kpi_id,label,numeric_value,format_type,unit,sort_order,valuation_date,pipeline_11_version
+Executive Overview,Workforce,active_employees,Active Employees,8898.0,integer,employees,10,2026-09-01,P11-C01
+Executive Overview,Workforce,gratuity_members,Gratuity Members,8675.0,integer,members,20,2026-09-01,P11-C01
+Executive Overview,Workforce,db_pension_members,DB Pension Members,1314.0,integer,members,30,2026-09-01,P11-C01
+Executive Overview,Workforce,dc_members,DC Superannuation Members,4318.0,integer,members,40,2026-09-01,P11-C01
+Executive Overview,Defined Benefit Funding,combined_db_liability,Combined DB Liability,4630697310.744759,currency,INR,50,2026-09-01,P11-C01
+Executive Overview,Defined Benefit Funding,combined_db_assets,Combined DB Plan Assets,1648171000.0,currency,INR,60,2026-09-01,P11-C01
+Executive Overview,Defined Benefit Funding,combined_db_funding_ratio,Combined DB Funding Ratio,0.3559228533844557,percentage,ratio,70,2026-09-01,P11-C01
+Executive Overview,Defined Benefit Funding,combined_db_funding_deficit,Combined DB Funding Deficit,2982526310.7447586,currency,INR,80,2026-09-01,P11-C01
+Executive Overview,Defined Contribution,dc_future_corpus,DC Future-Contribution Corpus,59467819156.37224,currency,INR,90,2026-09-01,P11-C01
+Executive Overview,Group Risk,gti_total_sum_assured,GTI Total Sum Assured,26662668000.0,currency,INR,100,2026-09-01,P11-C01
+Executive Overview,Group Risk,gti_expected_claims,GTI Fresh Expected Claims,22906469.340783253,currency,INR,110,2026-09-01,P11-C01
+Executive Overview,Group Risk,gti_fresh_gross_premium,GTI Fresh Gross Premium,28633086.675979063,currency,INR,120,2026-09-01,P11-C01
+Executive Overview,Group Risk,gti_fcl_referrals,GTI FCL Referrals,624.0,integer,employees,130,2026-09-01,P11-C01
+Executive Overview,Group Risk,gti_fcl_referral_rate,GTI FCL Referral Rate,0.07885757614052824,percentage,ratio,140,2026-09-01,P11-C01
+Executive Overview,Governance,validation_failures,Validation Failures,0.0,integer,checks,150,2026-09-01,P11-C01
+Executive Overview,Governance,governance_reviews,Governance Review Categories,8.0,integer,categories,160,2026-09-01,P11-C01

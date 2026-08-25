@@ -1,0 +1,16 @@
+check,exceptions,status,note
+employee_id unique,0,PASS,One row per employee after duplicate resolution
+critical employee fields complete,0,PASS,
+joining age within QA range,0,PASS,
+active employee has no exit date,0,PASS,
+non-active employee has exit date,0,PASS,
+status and exit reason agree,0,PASS,
+gratuity members have plan ID,0,PASS,
+superannuation members have plan ID,0,PASS,
+GTI members have plan ID,0,PASS,
+EDLI eligibility consistent with PF membership,0,PASS,
+salary history core fields complete and positive,0,PASS,
+claims exposure periods usable,0,PASS,
+paid/approved claim amounts resolved,1,REVIEW,Unresolved claim amounts are intentionally not fabricated
+plan assets reconcile,0,PASS,
+plan rule IDs unique,0,PASS,

@@ -1,0 +1,9 @@
+check,exceptions,status,note
+decrement rule parameters valid,0,PASS,
+early retirement logistic MLE converged,0,PASS,
+"current decrement probabilities within [0,1]",0,PASS,
+current competing probabilities sum to q_any,0,PASS,
+"product mortality probabilities within [0,1]",0,PASS,
+projected employee probability mass equals one,0,PASS,
+"retirement reach probability within [0,1]",0,PASS,
+historical expected events are non-negative,0,PASS,

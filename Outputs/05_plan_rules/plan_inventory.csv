@@ -1,0 +1,12 @@
+plan_id,product_type,active_rule_count,parameter_count,editable_parameter_count,locked_parameter_count,formula_template_count,formula_templates,statutory_locked_plan_flag,rule_engine_version
+EDLI_STAT_CURRENT,EDLI,10,10,0,10,1,edli_effective_date_rule,True,P05-C01
+GRAT_ENH_02,Gratuity,18,18,9,9,9,bernoulli_disability | gompertz_makeham | gratuity_days_over_divisor | gratuity_eligibility | logistic_early_retirement | present_value_discounting | qualifying_service_rounding | salary_projection | weibull_withdrawal,False,P05-C01
+GRAT_EXEC_03,Gratuity,18,18,9,9,9,bernoulli_disability | gompertz_makeham | gratuity_days_over_divisor | gratuity_eligibility | logistic_early_retirement | present_value_discounting | qualifying_service_rounding | salary_projection | weibull_withdrawal,False,P05-C01
+GRAT_STD_01,Gratuity,18,18,8,10,9,bernoulli_disability | gompertz_makeham | gratuity_days_over_divisor | gratuity_eligibility | logistic_early_retirement | present_value_discounting | qualifying_service_rounding | salary_projection | weibull_withdrawal,False,P05-C01
+GTI_FLAT_01,GTI,10,10,9,1,5,gti_expected_claims | gti_flat_cover | gti_gross_premium | gti_underwriting | limited_fluctuation_credibility,False,P05-C01
+GTI_GRADE_03,GTI,17,17,16,1,5,gti_expected_claims | gti_grade_based | gti_gross_premium | gti_underwriting | limited_fluctuation_credibility,False,P05-C01
+GTI_SAL_02,GTI,13,13,12,1,5,gti_expected_claims | gti_gross_premium | gti_salary_multiple | gti_underwriting | limited_fluctuation_credibility,False,P05-C01
+PEN_DB_01,DB_Pension,14,14,13,1,10,bernoulli_disability | db_pension_accrual | db_pension_retirement | gompertz_makeham | pension_escalation | pensioner_survival | present_value_discounting | salary_projection | spouse_pension | weibull_withdrawal,False,P05-C01
+PEN_DB_02,DB_Pension,14,14,13,1,10,bernoulli_disability | db_pension_accrual | db_pension_retirement | gompertz_makeham | pension_escalation | pensioner_survival | present_value_discounting | salary_projection | spouse_pension | weibull_withdrawal,False,P05-C01
+SUP_DC_01,DC_Superannuation,8,8,8,0,4,dc_accumulation | dc_contribution | dc_retirement | salary_projection,False,P05-C01
+SUP_DC_02,DC_Superannuation,8,8,8,0,4,dc_accumulation | dc_contribution | dc_retirement | salary_projection,False,P05-C01

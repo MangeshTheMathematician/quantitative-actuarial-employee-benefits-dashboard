@@ -1,0 +1,12 @@
+plan_id,product_type,required_parameter_count,active_parameter_count,missing_required_parameter_count,missing_required_parameters,required_parameters_complete_flag
+EDLI_STAT_CURRENT,EDLI,10,10,0,,True
+GRAT_ENH_02,Gratuity,18,18,0,,True
+GRAT_EXEC_03,Gratuity,18,18,0,,True
+GRAT_STD_01,Gratuity,18,18,0,,True
+GTI_FLAT_01,GTI,10,10,0,,True
+GTI_GRADE_03,GTI,17,17,0,,True
+GTI_SAL_02,GTI,13,13,0,,True
+PEN_DB_01,DB_Pension,11,14,0,,True
+PEN_DB_02,DB_Pension,11,14,0,,True
+SUP_DC_01,DC_Superannuation,8,8,0,,True
+SUP_DC_02,DC_Superannuation,8,8,0,,True

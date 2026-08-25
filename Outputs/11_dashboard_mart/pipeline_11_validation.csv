@@ -1,0 +1,11 @@
+check,exceptions,status,note,pipeline_11_version
+Company KPI table contains exactly one row,0,PASS,,P11-C01
+Dashboard KPI IDs unique,0,PASS,,P11-C01
+Dashboard employee detail unique,0,PASS,,P11-C01
+Dashboard product-plan combinations unique,0,PASS,,P11-C01
+Dashboard segment combinations unique,0,PASS,,P11-C01
+Pipeline 10 validation contains no failures,0,PASS,,P11-C01
+Dashboard product DB liability reconciles to company KPI,0,PASS,,P11-C01
+Dashboard GTI fresh premium reconciles to company KPI,0,PASS,,P11-C01
+Dashboard governance register available,0,PASS,,P11-C01
+Dashboard funding percentages reconcile,0,PASS,,P11-C01

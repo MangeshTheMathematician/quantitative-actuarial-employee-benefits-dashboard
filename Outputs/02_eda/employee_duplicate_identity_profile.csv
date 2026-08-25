@@ -1,0 +1,51 @@
+employee_id,row_count,duplicate_type,differing_column_count,differing_columns
+E00246,2,Conflicting,1,basic_salary_monthly
+E00253,2,Conflicting,1,basic_salary_monthly
+E00337,2,Exact,0,
+E00848,2,Exact,0,
+E01070,2,Conflicting,1,basic_salary_monthly
+E01428,2,Conflicting,1,basic_salary_monthly
+E02080,2,Conflicting,1,basic_salary_monthly
+E02146,2,Exact,0,
+E02746,2,Conflicting,1,basic_salary_monthly
+E02944,2,Conflicting,1,basic_salary_monthly
+E03150,2,Conflicting,1,basic_salary_monthly
+E03196,2,Exact,0,
+E03347,2,Conflicting,1,source_system
+E03428,2,Exact,0,
+E04137,2,Conflicting,1,basic_salary_monthly
+E04323,2,Conflicting,2,"basic_salary_monthly, source_system"
+E04445,2,Conflicting,1,basic_salary_monthly
+E04520,2,Conflicting,2,"basic_salary_monthly, source_system"
+E04714,2,Exact,0,
+E04753,2,Exact,0,
+E04871,2,Conflicting,1,basic_salary_monthly
+E04903,2,Conflicting,1,basic_salary_monthly
+E05247,2,Conflicting,1,basic_salary_monthly
+E05407,2,Exact,0,
+E05447,2,Conflicting,1,basic_salary_monthly
+E05682,2,Exact,0,
+E05798,2,Conflicting,1,basic_salary_monthly
+E05915,2,Conflicting,1,source_system
+E06304,2,Exact,0,
+E06311,2,Conflicting,2,"basic_salary_monthly, source_system"
+E06317,2,Conflicting,1,basic_salary_monthly
+E06526,2,Exact,0,
+E06905,2,Conflicting,1,source_system
+E07271,2,Exact,0,
+E07301,2,Exact,0,
+E07435,2,Exact,0,
+E08016,2,Exact,0,
+E08442,2,Exact,0,
+E08466,2,Conflicting,1,source_system
+E08494,2,Exact,0,
+E08673,2,Exact,0,
+E08688,2,Conflicting,2,"basic_salary_monthly, source_system"
+E08813,2,Exact,0,
+E09131,2,Conflicting,1,basic_salary_monthly
+E09181,2,Conflicting,1,basic_salary_monthly
+E09385,2,Exact,0,
+E09407,2,Conflicting,1,basic_salary_monthly
+E09560,2,Conflicting,2,"basic_salary_monthly, source_system"
+E09598,2,Conflicting,1,source_system
+E09734,2,Conflicting,1,basic_salary_monthly

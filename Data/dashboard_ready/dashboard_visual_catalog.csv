@@ -1,0 +1,13 @@
+visual_id,page,visual_type,source_file,title,x_field,y_field,purpose,pipeline_11_version
+V01,Executive Overview,KPI Cards,dashboard_kpi_cards.csv,Employee Benefits Portfolio Overview,,numeric_value,"Headline workforce, funding and group-risk metrics.",P11-C01
+V02,Executive Overview,Bar Chart,dashboard_product_overview.csv,Actuarial Liability by Defined Benefit Product,product_type,actuarial_liability,Compare Gratuity and DB Pension obligations.,P11-C01
+V03,Funding & Liabilities,Bar Chart,dashboard_plan_overview.csv,Liability and Assets by Funded Plan,plan_id,actuarial_liability / plan_assets,Compare liability and funded assets plan by plan.,P11-C01
+V04,Funding & Liabilities,Bar Chart,dashboard_plan_overview.csv,Funding Ratio by Defined Benefit Plan,plan_id,funding_ratio_pct,Show relative funding adequacy without changing assumptions.,P11-C01
+V05,DC Superannuation,Bar Chart,dashboard_plan_overview.csv,Projected Future-Contribution Corpus by DC Plan,plan_id,projected_future_contribution_corpus,Compare future DC accumulation across plans.,P11-C01
+V06,Group Risk,Bar Chart,dashboard_plan_overview.csv,GTI Sum Assured by Plan,plan_id,total_sum_assured,Compare insured death-risk exposure.,P11-C01
+V07,Group Risk,Bar Chart,dashboard_plan_overview.csv,GTI Fresh Expected Claims by Plan,plan_id,fresh_expected_claim_cost,Compare fresh-model mortality claim cost.,P11-C01
+V08,Group Risk,Bar Chart,dashboard_plan_overview.csv,GTI Free-Cover-Limit Referrals,plan_id,underwriting_referrals,Show employees requiring underwriting review.,P11-C01
+V09,Workforce Concentration,Bar Chart,dashboard_segment_risk.csv,Defined Benefit Liability by Workforce Segment,segment_value,combined_db_liability,Identify concentration of funded obligations.,P11-C01
+V10,Workforce Concentration,Bar Chart,dashboard_segment_risk.csv,GTI Sum Assured by Workforce Segment,segment_value,gti_sum_assured,Identify concentration of insured risk.,P11-C01
+V11,Governance & Validation,Table,dashboard_governance.csv,Model Governance Reviews,governance_item,review_rows,Display model limitations and controlled fallbacks.,P11-C01
+V12,Governance & Validation,Table,dashboard_validation.csv,Portfolio Validation Checks,check,status,Expose portfolio reconciliation and validation status.,P11-C01

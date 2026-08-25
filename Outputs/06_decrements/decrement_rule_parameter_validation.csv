@@ -1,0 +1,48 @@
+plan_id,product_type,parameter_name,validation_rule,valid_flag
+GRAT_STD_01,Gratuity,mortality_model,Expected Gompertz-Makeham,True
+GRAT_STD_01,Gratuity,mortality_A,A >= 0,True
+GRAT_STD_01,Gratuity,mortality_B,B >= 0,True
+GRAT_STD_01,Gratuity,mortality_c,c > 1 for increasing adult mortality,True
+GRAT_STD_01,Gratuity,withdrawal_model,Expected Weibull,True
+GRAT_STD_01,Gratuity,weibull_eta,eta > 0,True
+GRAT_STD_01,Gratuity,weibull_k,k > 0,True
+GRAT_STD_01,Gratuity,disability_annual_q,0 <= q < 1,True
+GRAT_STD_01,Gratuity,early_retirement_model,Expected Logistic,True
+GRAT_ENH_02,Gratuity,mortality_model,Expected Gompertz-Makeham,True
+GRAT_ENH_02,Gratuity,mortality_A,A >= 0,True
+GRAT_ENH_02,Gratuity,mortality_B,B >= 0,True
+GRAT_ENH_02,Gratuity,mortality_c,c > 1 for increasing adult mortality,True
+GRAT_ENH_02,Gratuity,withdrawal_model,Expected Weibull,True
+GRAT_ENH_02,Gratuity,weibull_eta,eta > 0,True
+GRAT_ENH_02,Gratuity,weibull_k,k > 0,True
+GRAT_ENH_02,Gratuity,disability_annual_q,0 <= q < 1,True
+GRAT_ENH_02,Gratuity,early_retirement_model,Expected Logistic,True
+GRAT_EXEC_03,Gratuity,mortality_model,Expected Gompertz-Makeham,True
+GRAT_EXEC_03,Gratuity,mortality_A,A >= 0,True
+GRAT_EXEC_03,Gratuity,mortality_B,B >= 0,True
+GRAT_EXEC_03,Gratuity,mortality_c,c > 1 for increasing adult mortality,True
+GRAT_EXEC_03,Gratuity,withdrawal_model,Expected Weibull,True
+GRAT_EXEC_03,Gratuity,weibull_eta,eta > 0,True
+GRAT_EXEC_03,Gratuity,weibull_k,k > 0,True
+GRAT_EXEC_03,Gratuity,disability_annual_q,0 <= q < 1,True
+GRAT_EXEC_03,Gratuity,early_retirement_model,Expected Logistic,True
+PEN_DB_01,DB_Pension,pensioner_mortality_model,Expected Gompertz-Makeham,True
+PEN_DB_01,DB_Pension,mortality_A,A >= 0,True
+PEN_DB_01,DB_Pension,mortality_B,B >= 0,True
+PEN_DB_01,DB_Pension,mortality_c,c > 1,True
+PEN_DB_02,DB_Pension,pensioner_mortality_model,Expected Gompertz-Makeham,True
+PEN_DB_02,DB_Pension,mortality_A,A >= 0,True
+PEN_DB_02,DB_Pension,mortality_B,B >= 0,True
+PEN_DB_02,DB_Pension,mortality_c,c > 1,True
+GTI_FLAT_01,GTI,mortality_model,Expected Gompertz-Makeham,True
+GTI_FLAT_01,GTI,mortality_A,A >= 0,True
+GTI_FLAT_01,GTI,mortality_B,B >= 0,True
+GTI_FLAT_01,GTI,mortality_c,c > 1,True
+GTI_SAL_02,GTI,mortality_model,Expected Gompertz-Makeham,True
+GTI_SAL_02,GTI,mortality_A,A >= 0,True
+GTI_SAL_02,GTI,mortality_B,B >= 0,True
+GTI_SAL_02,GTI,mortality_c,c > 1,True
+GTI_GRADE_03,GTI,mortality_model,Expected Gompertz-Makeham,True
+GTI_GRADE_03,GTI,mortality_A,A >= 0,True
+GTI_GRADE_03,GTI,mortality_B,B >= 0,True
+GTI_GRADE_03,GTI,mortality_c,c > 1,True

@@ -1,0 +1,3 @@
+check,exceptions
+salary employee_id exists in employee master,0
+claims employee_id exists in employee master,0

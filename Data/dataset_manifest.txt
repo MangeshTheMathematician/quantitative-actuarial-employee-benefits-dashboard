@@ -1,0 +1,29 @@
+EMPLOYEE BENEFITS SYNTHETIC DATASET MANIFEST
+Valuation date: 2026-09-01
+Random seed: 26092026
+
+FILES
+- employee_census_raw.csv: 10,000 rows x 40 columns
+- salary_history.csv: 39,411 rows x 8 columns
+- claims_history.csv: 43,595 rows x 11 columns
+- plan_assets.csv: 25 rows x 10 columns
+- plan_rules_assumptions.csv: 140 rows x 13 columns
+
+EMPLOYEE CENSUS DESIGN
+- Raw census rows: 10,000
+- Unique employee IDs: 9,950
+- Rows participating in duplicate employee IDs: 100
+- Controlled issues include missing dates/salaries, duplicate IDs, salary outliers, status/date conflicts, missing plan IDs, invalid joining ages, and selected PF/EDLI inconsistencies.
+- Derived actuarial outputs are intentionally excluded from the raw census and are to be created by the Python modelling pipeline.
+
+DESIGN PRINCIPLES
+- One employee master feeds separate Gratuity, Superannuation/Pension, EDLI and GTI engines.
+- Plan IDs live on employee records; plan formulas and editable parameters live in plan_rules_assumptions.csv.
+- Benefit outputs are recalculated dynamically from plan rules. EDLI remains effective-date/statutory and is not freely user-designed.
+- plan_assets.csv contains pooled Gratuity and DB pension plan assets, not individual DC member corpus.
+- salary_history.csv contains historical product-relevant salary bases and is intentionally long-format by employee/effective date.
+- claims_history.csv combines exposure records (product_type=Experience) with product-specific claim records so decrement experience and claims analysis can be separated correctly.
+
+IMPORTANT
+- All data are synthetic and fictional for educational/dashboard development use.
+- EDLI values in historical synthetic claim rows are illustrative observed records. Production processing must use the official effective-date rule set/calculator.
